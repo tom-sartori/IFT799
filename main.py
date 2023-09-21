@@ -1,8 +1,11 @@
-# This is a sample Python script.
-
-def print_hi(name):
-    print(f'Hi, {name}')
+from Gene import Gene
+from Label import Label
+from read_data import get_labels, get_genes
 
 
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    labels: [Label] = get_labels()
+    print(labels[0].sample)
+
+    genes: [Gene] = get_genes()
+    print(genes[0].sample)
