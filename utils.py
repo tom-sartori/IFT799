@@ -28,3 +28,10 @@ def get_mahalanobis_distance(u: [float], v: [float], inv_cov: [[float]]) -> floa
 
 def get_cosine_distance(u: [float], v: [float]) -> float:
     return distance.cosine(u, v)
+
+
+def select_columns_for_tuple_class_matrix_list(tuple_class_matrix_list: [(str, [[float]])]) -> [str, np.ndarray]:
+    selected_tuples: [str, np.ndarray] = []
+    for tup in tuple_class_matrix_list:
+        selected_tuples.append((tup[0], np.array(tup[1])[:, 0:2]))
+    return selected_tuples
