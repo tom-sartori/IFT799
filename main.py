@@ -1,3 +1,9 @@
+#####
+# Alexandre Theisse 23 488 180
+# Louis-Vincent Capelli 23 211 533
+# Tom Sartori 23 222 497
+###
+
 import Gene
 import Label
 import intra_class
@@ -136,6 +142,3 @@ if __name__ == '__main__':
     # sns.scatterplot(data=data_umap_df, x='UMAP1', y='UMAP2', hue='class', palette='deep')
     # plt.title('UMAP')
     # plt.show()
-
-
-
