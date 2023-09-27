@@ -2,12 +2,16 @@ import Gene
 import Label
 import intra_class
 
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import umap
 
 from inter_class import get_inter_class_distance_markdown_table
 from overlap import get_overlap_markdown_table
 from shared import get_all_genes_by_class, get_one_gene_by_class
+from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
 
 if __name__ == '__main__':
     # Get data.
@@ -49,17 +53,17 @@ if __name__ == '__main__':
     # overlap_a_b: 1.2245241204635546
     
     # Method 2:
-    chosen_gene_1 = 3
-    chosen_gene_2 = 4
-    distinct_classes: [str] = Label.get_distinct_classes(labels)
-    chosen_gene_1_data_by_class: {str: [float]} = {}
-    chosen_gene_2_data_by_class: {str: [float]} = {}
-    for class_name in distinct_classes:
-        samples_from_class: [str] = Label.get_samples_by_class(labels, class_name)
-        chosen_gene_1_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_1)
-        chosen_gene_2_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_2)
+    # chosen_gene_1 = 3
+    # chosen_gene_2 = 4
+    # distinct_classes: [str] = Label.get_distinct_classes(labels)
+    # chosen_gene_1_data_by_class: {str: [float]} = {}
+    # chosen_gene_2_data_by_class: {str: [float]} = {}
+    # for class_name in distinct_classes:
+    #     samples_from_class: [str] = Label.get_samples_by_class(labels, class_name)
+    #     chosen_gene_1_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_1)
+    #     chosen_gene_2_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_2)
 
-    # Plotting the classes' distributions for the first chosen gene as histograms.
+    # 2.a) Plotting the classes' distributions for the first chosen gene as histograms.
     # fig, axs = plt.subplots(2, 3)
     # plt.subplots_adjust(wspace=0.5, hspace=0.5)
     # fig.suptitle(f'Distributions of the gene_{chosen_gene_1} for each class')
@@ -76,7 +80,7 @@ if __name__ == '__main__':
     # axs[1, 2].axis('off')
     # plt.show()
 
-    # Plotting the data of both chosen genes as one scatter plot.
+    # 2.b) Plotting the data of both chosen genes as one scatter plot.
     # plt.scatter(chosen_gene_1_data_by_class[distinct_classes[0]], chosen_gene_2_data_by_class[distinct_classes[0]], color='darkorange', marker='x')
     # plt.scatter(chosen_gene_1_data_by_class[distinct_classes[1]], chosen_gene_2_data_by_class[distinct_classes[1]], color='darkred', marker='x')
     # plt.scatter(chosen_gene_1_data_by_class[distinct_classes[2]], chosen_gene_2_data_by_class[distinct_classes[2]], color='darkgreen', marker='x')
@@ -88,8 +92,50 @@ if __name__ == '__main__':
     # plt.legend(distinct_classes)
     # plt.show()
 
-    # Plotting joint plots of the distributions of all pairs of classes for the first chosen gene.
+    # 2.c) Plotting joint plots of the distributions of all pairs of classes for the first chosen gene.
     # for i in range(0, len(distinct_classes)):
     #     for j in range(i + 1, len(distinct_classes)):
     #         sns.jointplot(x=chosen_gene_1_data_by_class[distinct_classes[i]], y=chosen_gene_1_data_by_class[distinct_classes[j]], kind='hist')
     #         plt.show()
+
+    # 2.d) Plotting scatter plots with PCA, t-SNE and UMAP.
+
+    # Read data
+    # data = pd.read_csv('resources/data.csv')
+    # Remove the first column
+    # data_without_sample = data.iloc[:, 1:]
+    # Get the class column from labels.csv
+    # classes = pd.read_csv('resources/labels.csv')['Class']
+
+    # 2.d.i) PCA
+    # pca = PCA(n_components=2)
+    # pca.fit(data_without_sample)
+    # data_pca = pca.transform(data_without_sample)
+    # data_pca_df = pd.DataFrame(data_pca, columns=['PC1', 'PC2'])
+    # data_pca_df['class'] = classes
+    # sns.scatterplot(data=data_pca_df, x='PC1', y='PC2', hue='class', palette='deep')
+    # plt.title('PCA')
+    # plt.show()
+
+    # 2.d.ii) t-SNE
+    # tsne = TSNE(n_components=2)
+    # tsne.fit(data_without_sample)
+    # data_tsne = tsne.fit_transform(data_without_sample)
+    # data_tsne_df = pd.DataFrame(data_tsne, columns=['t-SNE1', 't-SNE2'])
+    # data_tsne_df['class'] = classes
+    # sns.scatterplot(data=data_tsne_df, x='t-SNE1', y='t-SNE2', hue='class', palette='deep')
+    # plt.title('t-SNE')
+    # plt.show()
+
+    # 2.d.iii) UMAP
+    # umap = umap.UMAP(n_components=2)
+    # umap.fit(data_without_sample)
+    # data_umap = umap.fit_transform(data_without_sample)
+    # data_umap_df = pd.DataFrame(data_umap, columns=['UMAP1', 'UMAP2'])
+    # data_umap_df['class'] = classes
+    # sns.scatterplot(data=data_umap_df, x='UMAP1', y='UMAP2', hue='class', palette='deep')
+    # plt.title('UMAP')
+    # plt.show()
+
+
+

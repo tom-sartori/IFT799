@@ -3,3 +3,6 @@ scipy
 numpy
 sklearn
 tabulate
+seaborn
+matplotlib
+umap-learn
