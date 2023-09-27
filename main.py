@@ -1,16 +1,12 @@
 import Gene
 import Label
 import intra_class
-import seaborn as sns
-from sklearn.decomposition import PCA
-from sklearn.manifold import TSNE
-from utils import select_columns_for_tuple_class_matrix_list
-from utils import nomtuples
+
 import matplotlib.pyplot as plt
 
 from inter_class import get_inter_class_distance_markdown_table
 from overlap import get_overlap_markdown_table
-from shared import get_genes_by_class
+from shared import get_all_genes_by_class, get_one_gene_by_class
 
 if __name__ == '__main__':
     # Get data.
@@ -21,7 +17,7 @@ if __name__ == '__main__':
 
     tuple_class_matrix_list: [(str, [[float]])] = []
     for cls in Label.get_distinct_classes(labels):
-        tuple_class_matrix_list.append((cls, get_genes_by_class(labels, genes, cls)))
+        tuple_class_matrix_list.append((cls, get_all_genes_by_class(labels, genes, cls)))
 
     # Method 1:
     #print(intra_class.get_intra_class_distance_markdown_table(tuple_class_matrix_list) + "\n")
@@ -52,36 +48,26 @@ if __name__ == '__main__':
     # overlap_a_b: 1.2245241204635546
     
     # Method 2:
-    data=select_columns_for_tuple_class_matrix_list(tuple_class_matrix_list)
-    
+    chosen_gene = 1
+    distinct_classes: [str] = Label.get_distinct_classes(labels)
+    chosen_gene_data_by_class: {str: [float]} = {}
+    for class_name in distinct_classes:
+        samples_from_class: [str] = Label.get_samples_by_class(labels, class_name)
+        chosen_gene_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene)
 
-    #fait moi un histogramme avec matplotlib pour chaque classe en fonction des gènes 
-    #deux histogrammes par classe
-  
-    plt.figure(figsize=(10, 10))
-
-    for i, (cls, matrix) in enumerate(data):
-        plt.subplot(3, 2, i + 1)
-        plt.title(cls)
-        plt.hist(matrix, bins=100)
-        
-        plt.tight_layout()
-    #fait moi un plot avec les nuages de points pour chaque classe en fonction des gènes
-    #1 plot au total
-    plt.figure(figsize=(10, 10))
-    for i, (cls, matrix) in enumerate(data):
-        plt.subplot(3, 2, i + 1)
-        plt.scatter(matrix[:, 1], matrix[:, 0], label=cls)
-        plt.tight_layout()
+    # Plotting the classes' distributions for the chosen gene.
+    fig, axs = plt.subplots(2, 3)
+    plt.subplots_adjust(wspace=0.5, hspace=0.5)
+    fig.suptitle(f'Distributions of the gene_{chosen_gene} for each class')
+    axs[0, 0].hist(chosen_gene_data_by_class[distinct_classes[0]], bins=20, rwidth=0.9, color='darkorange')
+    axs[0, 0].set_title(distinct_classes[0])
+    axs[0, 1].hist(chosen_gene_data_by_class[distinct_classes[1]], bins=20, rwidth=0.9, color='darkred')
+    axs[0, 1].set_title(distinct_classes[1])
+    axs[0, 2].hist(chosen_gene_data_by_class[distinct_classes[2]], bins=20, rwidth=0.9, color='darkgreen')
+    axs[0, 2].set_title(distinct_classes[2])
+    axs[1, 0].hist(chosen_gene_data_by_class[distinct_classes[3]], bins=20, rwidth=0.9, color='darkblue')
+    axs[1, 0].set_title(distinct_classes[3])
+    axs[1, 1].hist(chosen_gene_data_by_class[distinct_classes[4]], bins=20, rwidth=0.9, color='darkviolet')
+    axs[1, 1].set_title(distinct_classes[4])
+    axs[1, 2].axis('off')
     plt.show()
-    
-    
-    
-   
-    
-    
-    
-    
-    
-    
-    
