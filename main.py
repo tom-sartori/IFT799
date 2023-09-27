@@ -59,15 +59,15 @@ if __name__ == '__main__':
     # overlap_a_b: 1.2245241204635546
     
     # Method 2:
-    # chosen_gene_1 = 3
-    # chosen_gene_2 = 4
-    # distinct_classes: [str] = Label.get_distinct_classes(labels)
-    # chosen_gene_1_data_by_class: {str: [float]} = {}
-    # chosen_gene_2_data_by_class: {str: [float]} = {}
-    # for class_name in distinct_classes:
-    #     samples_from_class: [str] = Label.get_samples_by_class(labels, class_name)
-    #     chosen_gene_1_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_1)
-    #     chosen_gene_2_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_2)
+    chosen_gene_1 = 3
+    chosen_gene_2 = 4
+    distinct_classes: [str] = Label.get_distinct_classes(labels)
+    chosen_gene_1_data_by_class: {str: [float]} = {}
+    chosen_gene_2_data_by_class: {str: [float]} = {}
+    for class_name in distinct_classes:
+        samples_from_class: [str] = Label.get_samples_by_class(labels, class_name)
+        chosen_gene_1_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_1)
+        chosen_gene_2_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_2)
 
     # 2.a) Plotting the classes' distributions for the first chosen gene as histograms.
     # fig, axs = plt.subplots(2, 3)
@@ -98,11 +98,29 @@ if __name__ == '__main__':
     # plt.legend(distinct_classes)
     # plt.show()
 
-    # 2.c) Plotting joint plots of the distributions of all pairs of classes for the first chosen gene.
-    # for i in range(0, len(distinct_classes)):
-    #     for j in range(i + 1, len(distinct_classes)):
-    #         sns.jointplot(x=chosen_gene_1_data_by_class[distinct_classes[i]], y=chosen_gene_1_data_by_class[distinct_classes[j]], kind='hist')
-    #         plt.show()
+    # 2.c) Plotting the distributions of pairs of classes.
+    chosen_class_1 = 0
+    chosen_class_2 = 1
+
+    # 2.c.i) Plotting the distributions of the first chosen gene for the two chosen classes as one histogram.
+    # plt.hist(chosen_gene_1_data_by_class[distinct_classes[chosen_class_1]], bins=20, rwidth=0.9, color='darkorange', alpha=0.5)
+    # plt.hist(chosen_gene_1_data_by_class[distinct_classes[chosen_class_2]], bins=20, rwidth=0.9, color='darkblue', alpha=0.5)
+    # plt.xlabel(f'gene_{chosen_gene_1}')
+    # plt.ylabel('Frequency')
+    # plt.title(f'Distributions of the gene_{chosen_gene_1} for the classes {distinct_classes[chosen_class_1]} and {distinct_classes[chosen_class_2]}')
+    # plt.legend([distinct_classes[chosen_class_1], distinct_classes[chosen_class_2]])
+    # plt.show()
+
+    # 2.c.ii) Plotting the distributions of both chosen genes for the two chosen classes as one joint plot.
+    # Combining data of the two chosen classes in one dataframe.
+    # gene_1_data_with_class = pd.DataFrame([[chosen_gene_1_data_by_class[distinct_classes[chosen_class_1]][i], chosen_gene_2_data_by_class[distinct_classes[chosen_class_1]][i], chosen_class_1] for i in range(len(chosen_gene_1_data_by_class[distinct_classes[chosen_class_1]]))], columns=[f'gene_{chosen_gene_1}', f'gene_{chosen_gene_2}', 'class'])
+    # gene_2_data_with_class = pd.DataFrame([[chosen_gene_1_data_by_class[distinct_classes[chosen_class_2]][i], chosen_gene_2_data_by_class[distinct_classes[chosen_class_2]][i], chosen_class_2] for i in range(len(chosen_gene_1_data_by_class[distinct_classes[chosen_class_2]]))], columns=[f'gene_{chosen_gene_1}', f'gene_{chosen_gene_2}', 'class'])
+    # gene_1_and_2_data_with_class = pd.concat([gene_1_data_with_class, gene_2_data_with_class], ignore_index=True)
+
+    # Plotting the joint plot.
+    # sns.jointplot(data=gene_1_and_2_data_with_class, x=f'gene_{chosen_gene_1}', y=f'gene_{chosen_gene_2}', hue='class', palette='deep')
+    # plt.title(f'Distributions of the gene_{chosen_gene_1} and gene_{chosen_gene_2} for the classes {distinct_classes[chosen_class_1]} and {distinct_classes[chosen_class_2]}')
+    # plt.show()
 
     # 2.d) Plotting scatter plots with PCA, t-SNE and UMAP.
 
