@@ -3,6 +3,7 @@ import Label
 import intra_class
 
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from inter_class import get_inter_class_distance_markdown_table
 from overlap import get_overlap_markdown_table
@@ -48,15 +49,15 @@ if __name__ == '__main__':
     # overlap_a_b: 1.2245241204635546
     
     # Method 2:
-    # chosen_gene_1 = 3
-    # chosen_gene_2 = 4
-    # distinct_classes: [str] = Label.get_distinct_classes(labels)
-    # chosen_gene_1_data_by_class: {str: [float]} = {}
-    # chosen_gene_2_data_by_class: {str: [float]} = {}
-    # for class_name in distinct_classes:
-    #     samples_from_class: [str] = Label.get_samples_by_class(labels, class_name)
-    #     chosen_gene_1_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_1)
-    #     chosen_gene_2_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_2)
+    chosen_gene_1 = 3
+    chosen_gene_2 = 4
+    distinct_classes: [str] = Label.get_distinct_classes(labels)
+    chosen_gene_1_data_by_class: {str: [float]} = {}
+    chosen_gene_2_data_by_class: {str: [float]} = {}
+    for class_name in distinct_classes:
+        samples_from_class: [str] = Label.get_samples_by_class(labels, class_name)
+        chosen_gene_1_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_1)
+        chosen_gene_2_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_2)
 
     # Plotting the classes' distributions for the first chosen gene as histograms.
     # fig, axs = plt.subplots(2, 3)
@@ -86,3 +87,9 @@ if __name__ == '__main__':
     # plt.title(f'Distributions of the gene_{chosen_gene_1} and gene_{chosen_gene_2} for each class')
     # plt.legend(distinct_classes)
     # plt.show()
+
+    # Plotting joint plots of the distributions of all pairs of classes for the first chosen gene.
+    # for i in range(0, len(distinct_classes)):
+    #     for j in range(i + 1, len(distinct_classes)):
+    #         sns.jointplot(x=chosen_gene_1_data_by_class[distinct_classes[i]], y=chosen_gene_1_data_by_class[distinct_classes[j]], kind='hist')
+    #         plt.show()
