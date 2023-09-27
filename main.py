@@ -48,26 +48,41 @@ if __name__ == '__main__':
     # overlap_a_b: 1.2245241204635546
     
     # Method 2:
-    chosen_gene = 1
-    distinct_classes: [str] = Label.get_distinct_classes(labels)
-    chosen_gene_data_by_class: {str: [float]} = {}
-    for class_name in distinct_classes:
-        samples_from_class: [str] = Label.get_samples_by_class(labels, class_name)
-        chosen_gene_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene)
+    # chosen_gene_1 = 3
+    # chosen_gene_2 = 4
+    # distinct_classes: [str] = Label.get_distinct_classes(labels)
+    # chosen_gene_1_data_by_class: {str: [float]} = {}
+    # chosen_gene_2_data_by_class: {str: [float]} = {}
+    # for class_name in distinct_classes:
+    #     samples_from_class: [str] = Label.get_samples_by_class(labels, class_name)
+    #     chosen_gene_1_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_1)
+    #     chosen_gene_2_data_by_class[class_name] = get_one_gene_by_class(labels, genes, class_name, chosen_gene_2)
 
-    # Plotting the classes' distributions for the chosen gene.
-    fig, axs = plt.subplots(2, 3)
-    plt.subplots_adjust(wspace=0.5, hspace=0.5)
-    fig.suptitle(f'Distributions of the gene_{chosen_gene} for each class')
-    axs[0, 0].hist(chosen_gene_data_by_class[distinct_classes[0]], bins=20, rwidth=0.9, color='darkorange')
-    axs[0, 0].set_title(distinct_classes[0])
-    axs[0, 1].hist(chosen_gene_data_by_class[distinct_classes[1]], bins=20, rwidth=0.9, color='darkred')
-    axs[0, 1].set_title(distinct_classes[1])
-    axs[0, 2].hist(chosen_gene_data_by_class[distinct_classes[2]], bins=20, rwidth=0.9, color='darkgreen')
-    axs[0, 2].set_title(distinct_classes[2])
-    axs[1, 0].hist(chosen_gene_data_by_class[distinct_classes[3]], bins=20, rwidth=0.9, color='darkblue')
-    axs[1, 0].set_title(distinct_classes[3])
-    axs[1, 1].hist(chosen_gene_data_by_class[distinct_classes[4]], bins=20, rwidth=0.9, color='darkviolet')
-    axs[1, 1].set_title(distinct_classes[4])
-    axs[1, 2].axis('off')
-    plt.show()
+    # Plotting the classes' distributions for the first chosen gene as histograms.
+    # fig, axs = plt.subplots(2, 3)
+    # plt.subplots_adjust(wspace=0.5, hspace=0.5)
+    # fig.suptitle(f'Distributions of the gene_{chosen_gene_1} for each class')
+    # axs[0, 0].hist(chosen_gene_1_data_by_class[distinct_classes[0]], bins=20, rwidth=0.9, color='darkorange')
+    # axs[0, 0].set_title(distinct_classes[0])
+    # axs[0, 1].hist(chosen_gene_1_data_by_class[distinct_classes[1]], bins=20, rwidth=0.9, color='darkred')
+    # axs[0, 1].set_title(distinct_classes[1])
+    # axs[0, 2].hist(chosen_gene_1_data_by_class[distinct_classes[2]], bins=20, rwidth=0.9, color='darkgreen')
+    # axs[0, 2].set_title(distinct_classes[2])
+    # axs[1, 0].hist(chosen_gene_1_data_by_class[distinct_classes[3]], bins=20, rwidth=0.9, color='darkblue')
+    # axs[1, 0].set_title(distinct_classes[3])
+    # axs[1, 1].hist(chosen_gene_1_data_by_class[distinct_classes[4]], bins=20, rwidth=0.9, color='darkviolet')
+    # axs[1, 1].set_title(distinct_classes[4])
+    # axs[1, 2].axis('off')
+    # plt.show()
+
+    # Plotting the data of both chosen genes as one scatter plot.
+    # plt.scatter(chosen_gene_1_data_by_class[distinct_classes[0]], chosen_gene_2_data_by_class[distinct_classes[0]], color='darkorange', marker='x')
+    # plt.scatter(chosen_gene_1_data_by_class[distinct_classes[1]], chosen_gene_2_data_by_class[distinct_classes[1]], color='darkred', marker='x')
+    # plt.scatter(chosen_gene_1_data_by_class[distinct_classes[2]], chosen_gene_2_data_by_class[distinct_classes[2]], color='darkgreen', marker='x')
+    # plt.scatter(chosen_gene_1_data_by_class[distinct_classes[3]], chosen_gene_2_data_by_class[distinct_classes[3]], color='darkblue', marker='x')
+    # plt.scatter(chosen_gene_1_data_by_class[distinct_classes[4]], chosen_gene_2_data_by_class[distinct_classes[4]], color='darkviolet', marker='x')
+    # plt.xlabel(f'gene_{chosen_gene_1}')
+    # plt.ylabel(f'gene_{chosen_gene_2}')
+    # plt.title(f'Distributions of the gene_{chosen_gene_1} and gene_{chosen_gene_2} for each class')
+    # plt.legend(distinct_classes)
+    # plt.show()
