@@ -1,4 +1,5 @@
 import numpy as np
+from collections import namedtuple
 from scipy.spatial import distance
 
 
@@ -35,3 +36,13 @@ def select_columns_for_tuple_class_matrix_list(tuple_class_matrix_list: [(str, [
     for tup in tuple_class_matrix_list:
         selected_tuples.append((tup[0], np.array(tup[1])[:, 0:2]))
     return selected_tuples
+
+def nomtuples(tuple_class_matrix_list: [(str, [[np.array]])]) -> [str, np.ndarray]:
+    Data=namedtuple('Data',['Class','Gene_1', 'Gene_2'])
+    for tup in tuple_class_matrix_list:
+        Data(tup[0], tup[1][0], tup[1][1])
+    
+    return Data
+    
+   
+  
