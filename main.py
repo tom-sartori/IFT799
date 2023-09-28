@@ -99,8 +99,8 @@ if __name__ == '__main__':
     # plt.show()
 
     # 2.c) Plotting the distributions of pairs of classes.
-    chosen_class_1 = 0
-    chosen_class_2 = 1
+    chosen_class_1 = 2
+    chosen_class_2 = 3
 
     # 2.c.i) Plotting the distributions of the first chosen gene for the two chosen classes as one histogram.
     # plt.hist(chosen_gene_1_data_by_class[distinct_classes[chosen_class_1]], bins=20, rwidth=0.9, color='darkorange', alpha=0.5)
@@ -113,8 +113,8 @@ if __name__ == '__main__':
 
     # 2.c.ii) Plotting the distributions of both chosen genes for the two chosen classes as one joint plot.
     # Combining data of the two chosen classes in one dataframe.
-    # gene_1_data_with_class = pd.DataFrame([[chosen_gene_1_data_by_class[distinct_classes[chosen_class_1]][i], chosen_gene_2_data_by_class[distinct_classes[chosen_class_1]][i], chosen_class_1] for i in range(len(chosen_gene_1_data_by_class[distinct_classes[chosen_class_1]]))], columns=[f'gene_{chosen_gene_1}', f'gene_{chosen_gene_2}', 'class'])
-    # gene_2_data_with_class = pd.DataFrame([[chosen_gene_1_data_by_class[distinct_classes[chosen_class_2]][i], chosen_gene_2_data_by_class[distinct_classes[chosen_class_2]][i], chosen_class_2] for i in range(len(chosen_gene_1_data_by_class[distinct_classes[chosen_class_2]]))], columns=[f'gene_{chosen_gene_1}', f'gene_{chosen_gene_2}', 'class'])
+    # gene_1_data_with_class = pd.DataFrame([[chosen_gene_1_data_by_class[distinct_classes[chosen_class_1]][i], chosen_gene_2_data_by_class[distinct_classes[chosen_class_1]][i], distinct_classes[chosen_class_1]] for i in range(len(chosen_gene_1_data_by_class[distinct_classes[chosen_class_1]]))], columns=[f'gene_{chosen_gene_1}', f'gene_{chosen_gene_2}', 'class'])
+    # gene_2_data_with_class = pd.DataFrame([[chosen_gene_1_data_by_class[distinct_classes[chosen_class_2]][i], chosen_gene_2_data_by_class[distinct_classes[chosen_class_2]][i], distinct_classes[chosen_class_2]] for i in range(len(chosen_gene_1_data_by_class[distinct_classes[chosen_class_2]]))], columns=[f'gene_{chosen_gene_1}', f'gene_{chosen_gene_2}', 'class'])
     # gene_1_and_2_data_with_class = pd.concat([gene_1_data_with_class, gene_2_data_with_class], ignore_index=True)
 
     # Plotting the joint plot.
