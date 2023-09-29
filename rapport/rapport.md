@@ -23,9 +23,12 @@ Deplus, pour calculer ces distances, nous avons utilisée différentes métrique
 Soit le point A de coordonnées (x,y) et le point B de coordonnées (z,w)  d(A,B) = √ (x − z )² + (y − w )² . Ici, pour notre TP, nous changerons en fait les coordonnées par les valeurs des différents gènes.
 La deuxième métriques est la distance Mahalanobis. La distance Mahalanobis a pour formule :
 
+ D_{M}(x)={\sqrt {(x-\mu )^{T}\Sigma ^{{-1}}(x-\mu )}}.\, Avec Sigma une matrice de covariance
+
 La dernière métriques est la distance cosinus. La distance cosinus a pour formule :
 
 ### Résultats
+
 
 
 ## Méthode 2 (avec visualisation des données)
