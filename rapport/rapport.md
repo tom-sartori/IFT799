@@ -3,8 +3,30 @@
 - Alexandre Theisse 23 488 180
 - Louis-Vincent Capelli 23 211 533
 - Tom Sartori 23 222 497
-
+## Introduction
+Ce premier TP se porte sur la séparation des différentes classes de cancer à partir de leur données génomiques. En effet, nous avons pu étudier les différentes types de tumeur telles que BRCA, KIRC, COAC, LUAD et PRAD. Le but de ce TP est de découvrir différentes méthodes pour savoir si les différentes tumeurs sont bien séparées.
 ## Méthode 1 (sans visualisation des données)
+Dans cette partie, sera présenté une méthode de clustering sans visualisation de données mais plutôt grâce aux distance intra et interclasse en fonction des gènes.
+
+### Distance Intra-classe 
+Pour débuter la méthode de classification, il nous faut calculer la distance intra-classe. Cette distance étant la distance maximale entre un patient quelquonque d'une classe et le centre de cette classe. Cette mesure peut aussi nous servir d'indicateur sur la dispersitée de la classe. En effet, plus la distance intra classe est grandes plus les données d'une même classe seront dispersées.
+### Distance Interclasse
+Ensuite, l'étape de classification se poursuit avec le calcul de la distance interclasse. Une distance inter-classe (exemple entre BRCA et KIRC) est définie comme
+étant la distance minimale entre un objet quelconque de la classe BRCA ou KIRC et du centre de la classe BRCA ou KIRC. Cette indicateur nous permet ainsi de comprendre si lestumeurs sont plus ou moins proches génomiquement parlant.
+
+### Overlap
+Enfin, pour tester que les différentes sont bien séparées nous calculons l'overlap soit une fonction test pour confirmer la séparation des classes. L'overlap peut se définir comme le rapport entre la somme des distances intraclasses des deux classes sélectionnées et deux fois la distance interclasse entre les deux classes. Ainsi, pour confirmer que les classes sont séparées, le rapport de l'overlap doit être logiquement en dessous de 1 ce que l'on pourrait interprétées comme le fait que les individus du même classe sont plus rapprochées entre eux qu'avec les individus de l'autre classe.
+
+### Explication des métriques utilisées
+Deplus, pour calculer ces distances, nous avons utilisée différentes métriques qui nous permettra de séparer les résultats et de comparer leur efficacité. Ainsi, nous avons utilisé trois métriques pour calculer les distances. La première métriques est la distance euclidienne. La distance euclidienne a pour formule : 
+
+Soit le point A de coordonnées (x,y) et le point B de coordonnées (z,w)  d(A,B) = √ (x − z )² + (y − w )² . Ici, pour notre TP, nous changerons en fait les coordonnées par les valeurs des différents gènes.
+La deuxième métriques est la distance Mahalanobis. La distance Mahalanobis a pour formule :
+
+La dernière métriques est la distance cosinus. La distance cosinus a pour formule :
+
+### Résultats
+
 
 ## Méthode 2 (avec visualisation des données)
 Nous avons choisi d'étudier les variables "gene_3" et "gene_4", qui ont une distribution assez similaire aux autres et ne possèdent pas trop de 0 contrairement à "gene_0" par exemple.
