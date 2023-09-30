@@ -9,68 +9,53 @@ Ce premier TP porte sur la séparation des différentes classes de cancer à par
 
 ## Méthode 1 (sans visualisation des données)
 
-Dans cette partie, une méthode de clustering sera présentée sans visualisation des données, mais plutôt grâce aux distances intra et interclasse en fonction des gènes.
+Dans cette partie, on étudiera une méthode pour confirmer la séparation des variables sans visualisation des données, grâce à un indicateur de superposition des classes défini à partir des distances intra-classe et inter-classe.
 
-### Distance Intraclasse
+### Distance intra-classe
 
-Pour débuter la méthode de classification, il nous faut calculer la distance intra-classe. Cette distance est la distance maximale entre un patient quelconque d'une classe et le centre de cette classe. Cette mesure peut aussi nous servir d'indicateur sur la dispersion de la classe. En effet, plus la distance intra-classe est grande, plus les données d'une même classe seront dispersées.
+Cette distance est la distance maximale entre un échantillon quelconque d'une classe et le centre de cette classe. Cette mesure peut aussi nous servir d'indicateur sur la dispersion de la classe. En effet, plus la distance intra-classe est grande, plus les données d'une même classe seront dispersées.
 
-### Distance Interclasse
+### Distance inter-classe
 
-Ensuite, l'étape de classification se poursuit avec le calcul de la distance interclasse. Une distance inter-classe (par exemple entre BRCA et KIRC) est définie comme étant la distance minimale entre un objet quelconque de la classe BRCA ou KIRC et le centre de la classe BRCA ou KIRC. Cet indicateur nous permet ainsi de comprendre si les tumeurs sont plus ou moins proches génomiquement parlant.
+La distance inter-classe (par exemple entre les classes "BRCA" et "KIRC") est définie comme étant la distance minimale entre un objet quelconque de la classe "BRCA" ou "KIRC" et le centre de la classe "BRCA" ou "KIRC". Cette distance est un indicateur de la séparation des classes. En effet, plus la distance inter-classe est grande, plus les classes sont séparées.
 
 ### Overlap
 
-Enfin, pour tester que les différentes classes sont bien séparées, nous calculons l'overlap, soit une fonction de test pour confirmer la séparation des classes. L'overlap peut se définir comme le rapport entre la somme des distances intraclasses des deux classes sélectionnées et deux fois la distance interclasse entre les deux classes. Ainsi, pour confirmer que les classes sont séparées, le rapport de l'overlap doit être logiquement inférieur à 1, ce que l'on pourrait interpréter comme le fait que les individus de la même classe sont plus rapprochés entre eux qu'avec les individus de l'autre classe.
+Enfin, pour tester que les différentes classes sont bien séparées, nous calculons l'overlap, un indicateur de test pour confirmer la séparation des classes. L'overlap peut se définir comme le rapport entre la somme des distances intra-classes des deux classes sélectionnées et deux fois la distance inter-classe entre les deux classes. Ainsi, pour confirmer que les classes sont séparées, le rapport de l'overlap doit être logiquement inférieur à 1, ce que l'on pourrait interpréter comme le fait que les individus de la même classe sont plus rapprochés entre eux qu'avec les individus de l'autre classe.
 
 ### Explication des métriques utilisées
 
-De plus, pour calculer ces distances, nous avons utilisé différentes métriques qui nous permettront de séparer les résultats et de comparer leur efficacité. Ainsi, nous avons utilisé trois métriques pour calculer les distances. La première métrique est la distance euclidienne. La distance euclidienne a pour formule :
-
-\[d(A,B) = \sqrt{(x - z)^2 + (y - w)^2}\]
-
-Ici, pour notre TP, nous changerons en fait les coordonnées par les valeurs des différents gènes.
-
-La deuxième métrique est la distance Mahalanobis. La distance Mahalanobis a pour formule :
-
-\[D_{M}(x) = \sqrt{(x - \mu)^T \Sigma^{-1}(x - \mu)}\]
-
-Avec \(\Sigma\) une matrice de covariance.
-
-La dernière métrique est la distance cosinus.
+Pour calculer ces indicateurs, nous avons utilisé différentes trois distances différentes afin d'en comparer les résultats. Ces distances sont la distance euclidienne, la distance cosinus et la distance de Mahalanobis.
 
 ### Méthode d'implémentation
 
-Pour coder ces différentes méthodes, nous avons d'abord extrait les données des fichiers labels.csv et data.csv grâce à la librairie pandas. Ces données sont ensuite stockées dans des matrices.
+Pour coder ces différentes méthodes, nous avons d'abord extrait les données des fichiers *labels.csv* et *data.csv* grâce à la librairie pandas. Ces données sont ensuite stockées dans des matrices.
 
-Ensuite, la prochaine étape est de calculer la moyenne des gènes pour les différentes classes de tumeurs que nous stockerons dans une autre matrice de taille n*m avec n=6, nombre de classe de tumeur et m étant égal au nombre de gènes.
+Ensuite, la prochaine étape est de calculer la moyenne des gènes pour les différentes classes de tumeurs que nous stockerons dans une autre matrice de taille n*m avec n=5, nombre de classe de tumeur et m étant égal au nombre de gènes.
 
-Une étape de plus est à faire pour la distance Mahalanobis puisqu'il faut calculer la matrice de covariance. De plus, celle-ci doit être inversible pour pouvoir être utilisée dans la formule. Une des principales difficultés a été de la rendre inversible. Les choix étaient soit de changer les valeurs à l'intérieur de la matrice en les multipliant par un très petit nombre. Cette méthode est assez efficace dans le cas où la précédente matrice avait un déterminant nul du fait d'une erreur d'arrondi. L'autre méthode est de réduire les dimensions de la matrice ce qui nous ferait perdre de l'information. À partir de cela, nous pouvons calculer les distances intraclasses et interclasses des différentes tumeurs en utilisant la librairie "scikit-learn" pour faire les calculs des différentes distances.
-
-Enfin, il nous faut faire le calcul de l'overlap qui nous permettra de savoir si les classes sont bien séparées à partir de ce jeu de données génomiques.
+Une étape de plus est à faire pour la distance Mahalanobis puisqu'il faut calculer la matrice de covariance. De plus, celle-ci doit être inversible pour pouvoir être utilisée dans la formule. Nous avons décidé de la remplacer par une matrice pseudo-inverse graâce à la fonction *pinv* de la librairie numpy. Le calcul de l'inverse de matrice de si grande taille peut prendre beaucoup de temps, cela ne nous a pas posé de problème mais une solution envisageable serait de n'utiliser qu'un sous ensemble de gènes (par exemple les gènes qui auraient le plus de poids dans les composantes principales générées par une ACP).
 
 ## Résultats
-Dans cette partie, nous allons vous présenter nos résultats. Cependant, nous n'avons pas réussi à mettre en place la distance Mahalanobis par faute de compréhension pour corriger l'erreur dans la matrice de covairance. Ainsi, les réulsats avec la distance euclidienne et cosinus vous serons présentés ici.
 
-Tout d'abord, voici le tableau récapitulant les distances intraclasses des différentes tumeurs.
+Tout d'abord, voici le tableau récapitulant les distances intra-classes des différentes tumeurs.
 ![résultats](img/resultats.PNG)
 
-Nous pouvons voir que les distances intraclasses sont du même ordre pour chaque classe ce qui laisse présager que les gènes choisis dans le jeu de données apportent les mêmes informations pour chaque classe.
+Nous pouvons voir que les distances intra-classes sont du même ordre pour chaque classe ce qui laisse présager que les gènes choisis dans le jeu de données apportent les mêmes informations pour chaque classe.
 
-Puis voici les résultats pour les distances interclasses de chaque classe deux à deux. 
+Voici les résultats pour les distances inter-classes entre chaque paire de classes.
 
 ![résultats2](img/resultats2.PNG)
 
-On peut constater que les distances interclasses sont plus petites en taille que les distances intraclasses. Ceci montre que les différentes classes sont assez proches les unes des autres et laisse présager que certaines ne seront pas bien séparées.
+On peut constater que les distances inter-classes sont inférieures aux distances intra-classes. Ceci montre que les différentes classes sont assez proches les unes des autres et laisse présager que certaines ne seront pas bien séparées.
 
-Enfin, Voici les résultats des tests d'overlap entre chaque classe deux à deux.
+Enfin, voici les résultats des tests d'overlap entre chaque paire de classes.
+
 ![OVERLAP](img/OVERLAP.PNG)
-On s'aperçoit que les overlaps sont supérieur à 1 dans tout les cas. Ainsi, les différentes classes de tumeurs ne sont suffisament séparées avec ce jeu de données. Pour améliorer la séparation de ces classes, une des pistes serait de restreindre les informations de ce jeu de données avec des gènes corrélées pour amplifier la distance interclasse.
+
+On s'aperçoit que les overlaps sont supérieur à 1 dans tout les cas. Ainsi, les différentes classes de tumeurs ne sont suffisament séparées avec ce jeu de données. Pour améliorer la séparation de ces classes, une des pistes serait de sélectionner les gènes les plus pertinents pour la séparation des classes. Pour cela, on pourrait utiliser une ACP comme présenté dans la partie suivante.
 
 ## Méthode 2 (avec visualisation des données)
 Nous avons choisi d'étudier les variables "gene_3" et "gene_4", qui ont une distribution assez similaire aux autres et ne possèdent pas trop de 0 contrairement à "gene_0" par exemple.
-
-
 
 ### Distribution des différentes classes (1D)
 Nous avons donc créé 5 histogrammes pour chacune de ces variables, en affichant dans chaque histogramme les données correspondant à la classe correspondante. 
@@ -92,10 +77,11 @@ Le graphique est assez difficile à interpréter du fait du manque de lisibilit�
 On observe ce genre de graphiques pour la plupart des paires de variables que nous avons testées, ce qui appuie l'intérêt de méthode comme l'ACP, t-SNE ou UMAP qui permettent de réduire la dimensionnalité des données afin de mettre en évidence des tendances qui ne sont pas visibles en choisissant deux variables au hasard.
 
 ### Distribution des paires de classes (1D)
-Parmi les 120 paires de classes possibles, nous avons choisi d'étudier les paires suivantes :
+Parmi les 10 paires de classes possibles, nous avons choisi d'étudier les paires suivantes :
 - "BRCA" et "COAD"
 - "KIRC" et "COAD"
 - "BRCA" et "KIRC"
+
 En effet, ces paires de classes sont celles qui sont les plus facilement distinguables sur le graphique en nuage de points précédent et nous permettront donc de mieux visualiser les différences entre les classes.
 
 Nous avons donc créé 1 histogramme pour chacune de ces 3 paires de classes, en affichant dans chaque histogramme les données correspondant aux 2 classes correspondantes et ce pour chacune des 2 variables. (Pour des raisons de lisibilité, nous avons choisi de ne joindre au rapport que les histogrammes pour la variable "gene_3")
