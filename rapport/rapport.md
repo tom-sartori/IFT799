@@ -137,6 +137,11 @@ Les données sont projetées sur un espace de dimension 2.
 Les résultats sont similaires à ceux de t-SNE avec une meilleure séparation des classes malgré à nouveau au moins un outlier pour la classe "LUAD".
 
 ## Sources et références
+- https://pandas.pydata.org/docs/
+- https://numpy.org/doc/stable/
+- https://docs.scipy.org/doc/scipy/
+- https://scikit-learn.org/0.21/documentation.html
+- https://umap-learn.readthedocs.io/en/latest/basic_usage.html
 - https://matplotlib.org/stable/api/figure_api.html
 - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html
 - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html
