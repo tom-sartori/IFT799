@@ -151,3 +151,4 @@ Les résultats sont similaires à ceux de t-SNE avec une meilleure séparation d
 - [Stackoverflow : how-can-i-make-a-blank-subplot-in-matplotlib](https://stackoverflow.com/questions/10035446/how-can-i-make-a-blank-subplot-in-matplotlib)
 - [Umap learn : basic usage](https://umap-learn.readthedocs.io/en/latest/basic_usage.html)
 - [Umap learn : doc](https://umap-learn.readthedocs.io/en/latest)
+- [Tabulate : toMarkdown()](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_markdown.html)
