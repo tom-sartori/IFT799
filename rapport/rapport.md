@@ -65,6 +65,7 @@ On peut constater que les distances interclasses sont plus petites en taille que
 
 Enfin, Voici les résultats des tests d'overlap entre chaque classe deux à deux.
 ![OVERLAP](img/OVERLAP.PNG)
+
 On s'aperçoit que les overlaps sont supérieur à 1 dans tout les cas. Ainsi, les différentes classes de tumeurs ne sont suffisament séparées avec ce jeu de données. Pour améliorer la séparation de ces classes, une des pistes serait de restreindre les informations de ce jeu de données avec des gènes corrélées pour amplifier la distance interclasse.
 
 ## Méthode 2 (avec visualisation des données)
@@ -151,6 +152,11 @@ Les données sont projetées sur un espace de dimension 2.
 Les résultats sont similaires à ceux de t-SNE avec une meilleure séparation des classes malgré à nouveau au moins un outlier pour la classe "LUAD".
 
 ## Sources et références
+- https://pandas.pydata.org/docs/
+- https://numpy.org/doc/stable/
+- https://docs.scipy.org/doc/scipy/
+- https://scikit-learn.org/0.21/documentation.html
+- https://umap-learn.readthedocs.io/en/latest/basic_usage.html
 - https://matplotlib.org/stable/api/figure_api.html
 - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html
 - https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html
