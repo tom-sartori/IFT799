@@ -41,17 +41,45 @@ Une étape de plus est à faire pour la distance Mahalanobis puisqu'il faut calc
 
 Tout d'abord, voici le tableau récapitulant les distances intra-classes des différentes tumeurs.
 
-![résultats](img/resultats.PNG)
+|  Class  |  Euclidean intra-class distance  |  Cosine intra-class distance  | Mahalanobis intra-class distance |
+|:-------:|:--------------------------------:|:-----------------------------:|:--------------------------------:|
+|  PRAD   |            239.573589            |           0.024669            |             4.127821             |
+|  LUAD   |            258.417752            |           0.028665            |             7.776645             |
+|  BRCA   |            256.958613            |           0.028873            |             4.345722             |
+|  KIRC   |            270.133555            |           0.030072            |             4.294693             |
+|  COAD   |            255.525361            |           0.024443            |             3.962462             |
 
 Voici les résultats pour les distances inter-classes entre chaque paire de classes.
 
-![résultats2](img/resultats2.PNG)
+|  Class A  |  Class B  |  Euclidean inter-class distance  |  Cosine inter-class distance  |
+|:---------:|:---------:|:--------------------------------:|:-----------------------------:|
+|   LUAD    |   PRAD    |            186.998355            |           0.014197            |
+|   BRCA    |   PRAD    |            177.901233            |           0.012691            |
+|   BRCA    |   LUAD    |            167.302799            |           0.011340            |
+|   BRCA    |   KIRC    |            215.223269            |           0.019060            |
+|   BRCA    |   COAD    |            197.588592            |           0.015987            |
+|   KIRC    |   PRAD    |            226.669290            |           0.020985            |
+|   KIRC    |   LUAD    |            200.050653            |           0.016165            |
+|   COAD    |   PRAD    |            218.541389            |           0.019673            |
+|   COAD    |   LUAD    |            181.115552            |           0.013887            |
+|   COAD    |   KIRC    |            222.970291            |           0.020486            |
 
 On peut constater que les distances inter-classes sont inférieures aux distances intra-classes. Ceci montre que les différentes classes sont assez proches les unes des autres et laisse présager que certaines ne seront pas bien séparées.
 
 Enfin, voici les résultats des tests d'overlap entre chaque paire de classes.
 
-![OVERLAP](img/OVERLAP.PNG)
+|  Class A  |  Class B  |  Euclidean overlap  |  Cosine overlap  | Mahalanobis overlap |
+|:---------:|:---------:|:-------------------:|:----------------:|:-------------------:|
+|   LUAD    |   PRAD    |      1.331539       |     1.878395     |      0.982739       |
+|   BRCA    |   PRAD    |      1.395528       |     2.109358     |      0.962372       |
+|   BRCA    |   LUAD    |      1.540250       |     2.536962     |      0.968237       |
+|   BRCA    |   KIRC    |      1.224524       |     1.546278     |      0.992783       |
+|   BRCA    |   COAD    |      1.296846       |     1.667449     |      0.948273       |
+|   KIRC    |   PRAD    |      1.124341       |     1.304295     |      0.882837       |
+|   KIRC    |   LUAD    |      1.321044       |     1.816812     |      0.923733       |
+|   COAD    |   PRAD    |      1.132735       |     1.248203     |      0.953954       |
+|   COAD    |   LUAD    |      1.418827       |     1.912094     |      0.923643       |
+|   COAD    |   KIRC    |      1.178764       |     1.330545     |      0.997632       |
 
 On s'aperçoit que les overlaps sont supérieurs à 1 dans le cas des distances euclidienne et cosinus. Ainsi, les différentes classes de tumeurs ne sont pas suffisament séparées avec ce jeu de données. La distance Mahalanobis montre de meilleurs résulats : toutes les classes peuvent être considérées comme séparées. Pour améliorer la séparation, une des pistes serait de sélectionner les gènes les plus pertinents pour la séparation des classes. Pour cela, on pourrait utiliser une ACP comme présenté dans la partie suivante.
 
