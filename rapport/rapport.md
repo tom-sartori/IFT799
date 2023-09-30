@@ -139,15 +139,15 @@ Les données sont projetées sur un espace de dimension 2.
 Les résultats sont similaires à ceux de t-SNE avec une meilleure séparation des classes malgré à nouveau au moins un outlier pour la classe "LUAD".
 
 ## Sources et références
-- https://pandas.pydata.org/docs/
-- https://numpy.org/doc/stable/
-- https://docs.scipy.org/doc/scipy/
-- https://scikit-learn.org/0.21/documentation.html
-- https://umap-learn.readthedocs.io/en/latest/basic_usage.html
-- https://matplotlib.org/stable/api/figure_api.html
-- https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html
-- https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html
-- https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots_adjust.html
-- https://stackoverflow.com/questions/10035446/how-can-i-make-a-blank-subplot-in-matplotlib
-- https://seaborn.pydata.org/generated/seaborn.jointplot.html
-- https://umap-learn.readthedocs.io/en/latest/
+- [Matplotlib : figure_api](https://matplotlib.org/stable/api/figure_api.html)
+- [Matplotlib : pyplot hist](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html)
+- [Matplotlib: pyplot subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)
+- [Matplotlib : pyplot subplots_adjust](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots_adjust.html)
+- [Numpy](https://numpy.org/doc/stable)
+- [Pandas](https://pandas.pydata.org/docs)
+- [Scipy](https://docs.scipy.org/doc/scipy)
+- [Scikit learn](https://scikit-learn.org/0.21/documentation.html)
+- [Seaborn pydata](https://seaborn.pydata.org/generated/seaborn.jointplot.html)
+- [Stackoverflow : how-can-i-make-a-blank-subplot-in-matplotlib](https://stackoverflow.com/questions/10035446/how-can-i-make-a-blank-subplot-in-matplotlib)
+- [Umap learn : basic usage](https://umap-learn.readthedocs.io/en/latest/basic_usage.html)
+- [Umap learn : doc](https://umap-learn.readthedocs.io/en/latest)
