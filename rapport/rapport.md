@@ -53,7 +53,7 @@ Enfin, voici les résultats des tests d'overlap entre chaque paire de classes.
 
 ![OVERLAP](img/OVERLAP.PNG)
 
-On s'aperçoit que les overlaps sont supérieurs à 1 dans tout les cas. Ainsi, les différentes classes de tumeurs ne sont pas suffisament séparées avec ce jeu de données. Pour améliorer la séparation de ces classes, une des pistes serait de sélectionner les gènes les plus pertinents pour la séparation des classes. Pour cela, on pourrait utiliser une ACP comme présenté dans la partie suivante.
+On s'aperçoit que les overlaps sont supérieurs à 1 dans le cas des distances euclidienne et cosinus. Ainsi, les différentes classes de tumeurs ne sont pas suffisament séparées avec ce jeu de données. La distance Mahalanobis montre de meilleurs résulats : toutes les classes peuvent être considérées comme séparées. Pour améliorer la séparation, une des pistes serait de sélectionner les gènes les plus pertinents pour la séparation des classes. Pour cela, on pourrait utiliser une ACP comme présenté dans la partie suivante.
 
 ## Méthode 2 (avec visualisation des données)
 Nous avons choisi d'étudier les variables "gene_3" et "gene_4", qui ont une distribution assez similaire aux autres et ne possèdent pas trop de 0 contrairement à "gene_0" par exemple.
