@@ -3,10 +3,6 @@
 - Alexandre Theisse 23 488 180
 - Louis-Vincent Capelli 23 211 533
 - Tom Sartori 23 222 497
-Voici le texte corrigé :
-
----
-
 ## Introduction
 
 Ce premier TP porte sur la séparation des différentes classes de cancer à partir de leurs données génomiques. En effet, nous avons étudié différents types de tumeurs telles que BRCA, KIRC, COAC, LUAD et PRAD. Le but de ce TP est de découvrir différentes méthodes pour déterminer si les différentes tumeurs sont bien séparées.
@@ -15,7 +11,7 @@ Ce premier TP porte sur la séparation des différentes classes de cancer à par
 
 Dans cette partie, une méthode de clustering sera présentée sans visualisation des données, mais plutôt grâce aux distances intra et interclasse en fonction des gènes.
 
-### Distance Intra-classe
+### Distance Intraclasse
 
 Pour débuter la méthode de classification, il nous faut calculer la distance intra-classe. Cette distance est la distance maximale entre un patient quelconque d'une classe et le centre de cette classe. Cette mesure peut aussi nous servir d'indicateur sur la dispersion de la classe. En effet, plus la distance intra-classe est grande, plus les données d'une même classe seront dispersées.
 
