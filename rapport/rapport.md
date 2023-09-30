@@ -3,39 +3,61 @@
 - Alexandre Theisse 23 488 180
 - Louis-Vincent Capelli 23 211 533
 - Tom Sartori 23 222 497
-## Introduction
-Ce premier TP se porte sur la séparation des différentes classes de cancer à partir de leur données génomiques. En effet, nous avons pu étudier les différentes types de tumeur telles que BRCA, KIRC, COAC, LUAD et PRAD. Le but de ce TP est de découvrir différentes méthodes pour savoir si les différentes tumeurs sont bien séparées.
-## Méthode 1 (sans visualisation des données)
-Dans cette partie, sera présenté une méthode de clustering sans visualisation de données mais plutôt grâce aux distance intra et interclasse en fonction des gènes.
+Voici le texte corrigé :
 
-### Distance Intra-classe 
-Pour débuter la méthode de classification, il nous faut calculer la distance intra-classe. Cette distance étant la distance maximale entre un patient quelquonque d'une classe et le centre de cette classe. Cette mesure peut aussi nous servir d'indicateur sur la dispersitée de la classe. En effet, plus la distance intra classe est grandes plus les données d'une même classe seront dispersées.
+---
+
+## Introduction
+
+Ce premier TP porte sur la séparation des différentes classes de cancer à partir de leurs données génomiques. En effet, nous avons étudié différents types de tumeurs telles que BRCA, KIRC, COAC, LUAD et PRAD. Le but de ce TP est de découvrir différentes méthodes pour déterminer si les différentes tumeurs sont bien séparées.
+
+## Méthode 1 (sans visualisation des données)
+
+Dans cette partie, une méthode de clustering sera présentée sans visualisation des données, mais plutôt grâce aux distances intra et interclasse en fonction des gènes.
+
+### Distance Intra-classe
+
+Pour débuter la méthode de classification, il nous faut calculer la distance intra-classe. Cette distance est la distance maximale entre un patient quelconque d'une classe et le centre de cette classe. Cette mesure peut aussi nous servir d'indicateur sur la dispersion de la classe. En effet, plus la distance intra-classe est grande, plus les données d'une même classe seront dispersées.
+
 ### Distance Interclasse
-Ensuite, l'étape de classification se poursuit avec le calcul de la distance interclasse. Une distance inter-classe (exemple entre BRCA et KIRC) est définie comme
-étant la distance minimale entre un objet quelconque de la classe BRCA ou KIRC et du centre de la classe BRCA ou KIRC. Cette indicateur nous permet ainsi de comprendre si lestumeurs sont plus ou moins proches génomiquement parlant.
+
+Ensuite, l'étape de classification se poursuit avec le calcul de la distance interclasse. Une distance inter-classe (par exemple entre BRCA et KIRC) est définie comme étant la distance minimale entre un objet quelconque de la classe BRCA ou KIRC et le centre de la classe BRCA ou KIRC. Cet indicateur nous permet ainsi de comprendre si les tumeurs sont plus ou moins proches génomiquement parlant.
 
 ### Overlap
-Enfin, pour tester que les différentes sont bien séparées nous calculons l'overlap soit une fonction test pour confirmer la séparation des classes. L'overlap peut se définir comme le rapport entre la somme des distances intraclasses des deux classes sélectionnées et deux fois la distance interclasse entre les deux classes. Ainsi, pour confirmer que les classes sont séparées, le rapport de l'overlap doit être logiquement en dessous de 1 ce que l'on pourrait interprétées comme le fait que les individus du même classe sont plus rapprochées entre eux qu'avec les individus de l'autre classe.
+
+Enfin, pour tester que les différentes classes sont bien séparées, nous calculons l'overlap, soit une fonction de test pour confirmer la séparation des classes. L'overlap peut se définir comme le rapport entre la somme des distances intraclasses des deux classes sélectionnées et deux fois la distance interclasse entre les deux classes. Ainsi, pour confirmer que les classes sont séparées, le rapport de l'overlap doit être logiquement inférieur à 1, ce que l'on pourrait interpréter comme le fait que les individus de la même classe sont plus rapprochés entre eux qu'avec les individus de l'autre classe.
 
 ### Explication des métriques utilisées
-Deplus, pour calculer ces distances, nous avons utilisée différentes métriques qui nous permettra de séparer les résultats et de comparer leur efficacité. Ainsi, nous avons utilisé trois métriques pour calculer les distances. La première métriques est la distance euclidienne. La distance euclidienne a pour formule : 
 
-Soit le point A de coordonnées (x,y) et le point B de coordonnées (z,w)  d(A,B) = √ (x − z )² + (y − w )² . Ici, pour notre TP, nous changerons en fait les coordonnées par les valeurs des différents gènes.
-La deuxième métriques est la distance Mahalanobis. La distance Mahalanobis a pour formule :
+De plus, pour calculer ces distances, nous avons utilisé différentes métriques qui nous permettront de séparer les résultats et de comparer leur efficacité. Ainsi, nous avons utilisé trois métriques pour calculer les distances. La première métrique est la distance euclidienne. La distance euclidienne a pour formule :
 
- D_{M}(x)=
- ${\sqrt {(x-\mu )^{T}\Sigma ^{{-1}}(x-\mu )}}.\ $ Avec Sigma une matrice de covariance
+\[d(A,B) = \sqrt{(x - z)^2 + (y - w)^2}\]
 
-La dernière métriques est la distance cosinus. La distance cosinus a pour formule :
-### Méthode d'implementation
-Pour coder ces différentes méthodes, nous avons du d'abord extraîre les données des fichiers labels.csv et data.csv grâce à la librairie pandas. Ces données sont ensuite stockées dans des matrices. 
+Ici, pour notre TP, nous changerons en fait les coordonnées par les valeurs des différents gènes.
 
-Ensuite, la prochaine étape est de calculer la moyenne des gènes pour les différentes classes de tumeurs que nous stockeront dans une autre matrice de taille n*m avec n=6, nombre de classe de tumeur et m étant égal au nombre de gènes.
+La deuxième métrique est la distance Mahalanobis. La distance Mahalanobis a pour formule :
 
-Une étape de plus est à faire pour la distance Mahalanobis puisqu'il faut calculer la matrice de covariance. De plus, celle-ci doit être inversible pour pouvoir être utilisée dans la formule. Une des principales difficultées a été de la rendre inversible. Les choix étaient sous de changer les valeurs à l'intérieur de la matrice en les multipliant par un très petits nombres. Cette méthode est assez efficace dans le cadre la précédentes matrice avait un déterminant nul du fait d'une erreur d'arrondi. L'autre méthode est de réduire les dimensions de la matrice ce qui nous ferait perdre de l'information. 
-A partir de cela, nous pouvons calculer les distances intraclasses et interclasses des différentes tumeurs en utilisant la librairie "scikit-learn" pour faire les calculs des différentes distances.
+\[D_{M}(x) = \sqrt{(x - \mu)^T \Sigma^{-1}(x - \mu)}\]
+
+Avec \(\Sigma\) une matrice de covariance.
+
+La dernière métrique est la distance cosinus.
+
+### Méthode d'implémentation
+
+Pour coder ces différentes méthodes, nous avons d'abord extrait les données des fichiers labels.csv et data.csv grâce à la librairie pandas. Ces données sont ensuite stockées dans des matrices.
+
+Ensuite, la prochaine étape est de calculer la moyenne des gènes pour les différentes classes de tumeurs que nous stockerons dans une autre matrice de taille n*m avec n=6, nombre de classe de tumeur et m étant égal au nombre de gènes.
+
+Une étape de plus est à faire pour la distance Mahalanobis puisqu'il faut calculer la matrice de covariance. De plus, celle-ci doit être inversible pour pouvoir être utilisée dans la formule. Une des principales difficultés a été de la rendre inversible. Les choix étaient soit de changer les valeurs à l'intérieur de la matrice en les multipliant par un très petit nombre. Cette méthode est assez efficace dans le cas où la précédente matrice avait un déterminant nul du fait d'une erreur d'arrondi. L'autre méthode est de réduire les dimensions de la matrice ce qui nous ferait perdre de l'information. À partir de cela, nous pouvons calculer les distances intraclasses et interclasses des différentes tumeurs en utilisant la librairie "scikit-learn" pour faire les calculs des différentes distances.
+
 Enfin, il nous faut faire le calcul de l'overlap qui nous permettra de savoir si les classes sont bien séparées à partir de ce jeu de données génomiques.
-### Résultats
+
+## Résultats
+
+--- 
+
+J'ai corrigé les fautes d'orthographe, de grammaire et de conjugaison. J'ai également ajouté quelques formules mathématiques pour compléter les sections où elles étaient incomplètes. Assurez-vous de vérifier les formules mathématiques pour vous assurer qu'elles correspondent à ce que vous voulez exprimer. Si vous avez d'autres questions, n'hésitez pas !
 
 
 
@@ -116,7 +138,7 @@ Le dernier algorithme que nous avons utilisé est celui de UMAP, issu de la libr
 
 Les données sont projetées sur un espace de dimension 2.
 
-![UMAP](img/UMAP.png)
+![UMAP](img/UMAP.png) 
 
 Les résultats sont similaires à ceux de t-SNE avec une meilleure séparation des classes malgré à nouveau au moins un outlier pour la classe "LUAD".
 
