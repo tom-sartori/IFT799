@@ -8,18 +8,16 @@
 
 import Gene
 import Label
-import intra_class
 
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import umap
 
-from inter_class import get_inter_class_distance_markdown_table
-from overlap import get_overlap_markdown_table
 from shared import get_all_genes_by_class, get_one_gene_by_class
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
+
 
 if __name__ == '__main__':
     print(pd.DataFrame([
@@ -38,12 +36,6 @@ if __name__ == '__main__':
     tuple_class_matrix_list: [(str, [[float]])] = []
     for cls in Label.get_distinct_classes(labels):
         tuple_class_matrix_list.append((cls, get_all_genes_by_class(labels, genes, cls)))
-
-    # Method 1:
-    print("Method 1:\n")
-    print(intra_class.get_intra_class_distance_markdown_table(tuple_class_matrix_list) + "\n")
-    print(get_inter_class_distance_markdown_table(tuple_class_matrix_list) + "\n")
-    print(get_overlap_markdown_table(tuple_class_matrix_list) + "\n")
 
     # Method 2:
     print("Method 2:\n")
