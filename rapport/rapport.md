@@ -53,7 +53,7 @@ Enfin, voici les résultats des tests d'overlap entre chaque paire de classes.
 
 ![OVERLAP](img/OVERLAP.PNG)
 
-On s'aperçoit que les overlaps sont supérieurs à 1 dans tout les cas. Ainsi, les différentes classes de tumeurs ne sont suffisament séparées avec ce jeu de données. Pour améliorer la séparation de ces classes, une des pistes serait de sélectionner les gènes les plus pertinents pour la séparation des classes. Pour cela, on pourrait utiliser une ACP comme présenté dans la partie suivante.
+On s'aperçoit que les overlaps sont supérieurs à 1 dans tout les cas. Ainsi, les différentes classes de tumeurs ne sont pas suffisament séparées avec ce jeu de données. Pour améliorer la séparation de ces classes, une des pistes serait de sélectionner les gènes les plus pertinents pour la séparation des classes. Pour cela, on pourrait utiliser une ACP comme présenté dans la partie suivante.
 
 ## Méthode 2 (avec visualisation des données)
 Nous avons choisi d'étudier les variables "gene_3" et "gene_4", qui ont une distribution assez similaire aux autres et ne possèdent pas trop de 0 contrairement à "gene_0" par exemple.
@@ -138,15 +138,16 @@ Les données sont projetées sur un espace de dimension 2.
 Les résultats sont similaires à ceux de t-SNE avec une meilleure séparation des classes malgré à nouveau au moins un outlier pour la classe "LUAD".
 
 ## Sources et références
-- https://pandas.pydata.org/docs/
-- https://numpy.org/doc/stable/
-- https://docs.scipy.org/doc/scipy/
-- https://scikit-learn.org/0.21/documentation.html
-- https://umap-learn.readthedocs.io/en/latest/basic_usage.html
-- https://matplotlib.org/stable/api/figure_api.html
-- https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html
-- https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html
-- https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots_adjust.html
-- https://stackoverflow.com/questions/10035446/how-can-i-make-a-blank-subplot-in-matplotlib
-- https://seaborn.pydata.org/generated/seaborn.jointplot.html
-- https://umap-learn.readthedocs.io/en/latest/
+- [Matplotlib : figure_api](https://matplotlib.org/stable/api/figure_api.html)
+- [Matplotlib : pyplot hist](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html)
+- [Matplotlib: pyplot subplots](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html)
+- [Matplotlib : pyplot subplots_adjust](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots_adjust.html)
+- [Numpy](https://numpy.org/doc/stable)
+- [Pandas](https://pandas.pydata.org/docs)
+- [Scipy](https://docs.scipy.org/doc/scipy)
+- [Scikit learn](https://scikit-learn.org/0.21/documentation.html)
+- [Seaborn pydata](https://seaborn.pydata.org/generated/seaborn.jointplot.html)
+- [Stackoverflow : how-can-i-make-a-blank-subplot-in-matplotlib](https://stackoverflow.com/questions/10035446/how-can-i-make-a-blank-subplot-in-matplotlib)
+- [Umap learn : basic usage](https://umap-learn.readthedocs.io/en/latest/basic_usage.html)
+- [Umap learn : doc](https://umap-learn.readthedocs.io/en/latest)
+- [Tabulate : toMarkdown()](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_markdown.html)
