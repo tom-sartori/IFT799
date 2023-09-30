@@ -40,9 +40,8 @@ Une étape de plus est à faire pour la distance Mahalanobis puisqu'il faut calc
 ## Résultats
 
 Tout d'abord, voici le tableau récapitulant les distances intra-classes des différentes tumeurs.
-![résultats](img/resultats.PNG)
 
-Nous pouvons voir que les distances intra-classes sont du même ordre pour chaque classe ce qui laisse présager que les gènes choisis dans le jeu de données apportent les mêmes informations pour chaque classe.
+![résultats](img/resultats.PNG)
 
 Voici les résultats pour les distances inter-classes entre chaque paire de classes.
 
