@@ -50,15 +50,27 @@ Une étape de plus est à faire pour la distance Mahalanobis puisqu'il faut calc
 Enfin, il nous faut faire le calcul de l'overlap qui nous permettra de savoir si les classes sont bien séparées à partir de ce jeu de données génomiques.
 
 ## Résultats
+Dans cette partie, nous allons vous présenter nos résultats. Cependant, nous n'avons pas réussi à mettre en place la distance Mahalanobis par faute de compréhension pour corriger l'erreur dans la matrice de covairance. Ainsi, les réulsats avec la distance euclidienne et cosinus vous serons présentés ici.
 
---- 
+Tout d'abord, voici le tableau récapitulant les distances intraclasses des différentes tumeurs.
+![Distance intraclassse](img/résultats.png)
 
-J'ai corrigé les fautes d'orthographe, de grammaire et de conjugaison. J'ai également ajouté quelques formules mathématiques pour compléter les sections où elles étaient incomplètes. Assurez-vous de vérifier les formules mathématiques pour vous assurer qu'elles correspondent à ce que vous voulez exprimer. Si vous avez d'autres questions, n'hésitez pas !
+Nous pouvons voir que les distances intraclasses sont du même ordre pour chaque classe ce qui laisse présager que les gènes choisis dans le jeu de données apportent les mêmes informations pour chaque classe.
 
+Puis voici les résultats pour les distances interclasses de chaque classe deux à deux. 
 
+![Distance Interclasse](img/résultats2.png)
+
+On peut constater que les distances interclasses sont plus petites en taille que les distances intraclasses. Ceci montre que les différentes classes sont assez proches les unes des autres et laisse présager que certaines ne seront pas bien séparées.
+
+Enfin, Voici les résultats des tests d'overlap entre chaque classe deux à deux.
+![Overlap](OVERLAP.png)
+On s'aperçoit que les overlaps sont supérieur à 1 dans tout les cas. Ainsi, les différentes classes de tumeurs ne sont suffisament séparées avec ce jeu de données. Pour améliorer la séparation de ces classes, une des pistes serait de restreindre les informations de ce jeu de données avec des gènes corrélées pour amplifier la distance interclasse.
 
 ## Méthode 2 (avec visualisation des données)
 Nous avons choisi d'étudier les variables "gene_3" et "gene_4", qui ont une distribution assez similaire aux autres et ne possèdent pas trop de 0 contrairement à "gene_0" par exemple.
+
+
 
 ### Distribution des différentes classes (1D)
 Nous avons donc créé 5 histogrammes pour chacune de ces variables, en affichant dans chaque histogramme les données correspondant à la classe correspondante. 
