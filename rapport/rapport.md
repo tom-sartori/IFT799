@@ -1,8 +1,10 @@
 # Rapport TP1
 ## Groupe de travail
-- Alexandre Theisse 23 488 180
-- Louis-Vincent Capelli 23 211 533
-- Tom Sartori 23 222 497
+|          Nom          | Matricule  |   CIP    |
+|:---------------------:|:----------:|:--------:|
+|   Alexandre Theisse   | 23 488 180 | thea1804 |
+| Louis-Vincent Capelli | 23 211 533 | capl1101 |
+|      Tom Sartori      | 23 222 497 | sart0701 |
 ## Introduction
 
 Ce premier TP porte sur la séparation des différentes classes de cancer à partir de leurs données génomiques. En effet, nous avons étudié différents types de tumeurs telles que BRCA, KIRC, COAC, LUAD et PRAD. Le but de ce TP est de découvrir différentes méthodes pour déterminer si les différentes tumeurs sont bien séparées.
