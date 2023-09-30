@@ -53,13 +53,13 @@ Enfin, il nous faut faire le calcul de l'overlap qui nous permettra de savoir si
 Dans cette partie, nous allons vous présenter nos résultats. Cependant, nous n'avons pas réussi à mettre en place la distance Mahalanobis par faute de compréhension pour corriger l'erreur dans la matrice de covairance. Ainsi, les réulsats avec la distance euclidienne et cosinus vous serons présentés ici.
 
 Tout d'abord, voici le tableau récapitulant les distances intraclasses des différentes tumeurs.
-![résultats](img/résultats.PNG)
+![résultats](img/resultats.PNG)
 
 Nous pouvons voir que les distances intraclasses sont du même ordre pour chaque classe ce qui laisse présager que les gènes choisis dans le jeu de données apportent les mêmes informations pour chaque classe.
 
 Puis voici les résultats pour les distances interclasses de chaque classe deux à deux. 
 
-![résultats2](img/résultats2.PNG)
+![résultats2](img/resultats2.PNG)
 
 On peut constater que les distances interclasses sont plus petites en taille que les distances intraclasses. Ceci montre que les différentes classes sont assez proches les unes des autres et laisse présager que certaines ne seront pas bien séparées.
 
