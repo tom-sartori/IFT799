@@ -23,10 +23,18 @@ Deplus, pour calculer ces distances, nous avons utilisée différentes métrique
 Soit le point A de coordonnées (x,y) et le point B de coordonnées (z,w)  d(A,B) = √ (x − z )² + (y − w )² . Ici, pour notre TP, nous changerons en fait les coordonnées par les valeurs des différents gènes.
 La deuxième métriques est la distance Mahalanobis. La distance Mahalanobis a pour formule :
 
- D_{M}(x)={\sqrt {(x-\mu )^{T}\Sigma ^{{-1}}(x-\mu )}}.\, Avec Sigma une matrice de covariance
+ D_{M}(x)=
+ ${\sqrt {(x-\mu )^{T}\Sigma ^{{-1}}(x-\mu )}}.\ $ Avec Sigma une matrice de covariance
 
 La dernière métriques est la distance cosinus. La distance cosinus a pour formule :
+### Méthode d'implementation
+Pour coder ces différentes méthodes, nous avons du d'abord extraîre les données des fichiers labels.csv et data.csv grâce à la librairie pandas. Ces données sont ensuite stockées dans des matrices. 
 
+Ensuite, la prochaine étape est de calculer la moyenne des gènes pour les différentes classes de tumeurs que nous stockeront dans une autre matrice de taille n*m avec n=6, nombre de classe de tumeur et m étant égal au nombre de gènes.
+
+Une étape de plus est à faire pour la distance Mahalanobis puisqu'il faut calculer la matrice de covariance. De plus, celle-ci doit être inversible pour pouvoir être utilisée dans la formule. Une des principales difficultées a été de la rendre inversible. Les choix étaient sous de changer les valeurs à l'intérieur de la matrice en les multipliant par un très petits nombres. Cette méthode est assez efficace dans le cadre la précédentes matrice avait un déterminant nul du fait d'une erreur d'arrondi. L'autre méthode est de réduire les dimensions de la matrice ce qui nous ferait perdre de l'information. 
+A partir de cela, nous pouvons calculer les distances intraclasses et interclasses des différentes tumeurs en utilisant la librairie "scikit-learn" pour faire les calculs des différentes distances.
+Enfin, il nous faut faire le calcul de l'overlap qui nous permettra de savoir si les classes sont bien séparées à partir de ce jeu de données génomiques.
 ### Résultats
 
 
