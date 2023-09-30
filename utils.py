@@ -1,7 +1,9 @@
-#####
-# Alexandre Theisse 23 488 180
-# Louis-Vincent Capelli 23 211 533
-# Tom Sartori 23 222 497
+###
+# |          Nom          | Matricule  |   CIP    |
+# |:---------------------:|:----------:|:--------:|
+# |   Alexandre Theisse   | 23 488 180 | thea1804 |
+# | Louis-Vincent Capelli | 23 211 533 | capl1101 |
+# |      Tom Sartori      | 23 222 497 | sart0701 |
 ###
 
 import numpy as np
@@ -19,9 +21,21 @@ def get_column_means(matrix: [[float]]) -> [float]:
     return np.mean(matrix, axis=0)
 
 
+proxy: [([[float]], [[float]])] = []  # Proxy for inv cov matrix. proxy[0] = matrix, proxy[1] = inv cov matrix.
+
+
 def get_inv_cov_matrix(matrix: [[float]]) -> [[float]]:
+    global proxy
+    for matrix_proxy in proxy:
+        if len(matrix_proxy[0]) == len(matrix) and len(matrix_proxy[0][0]) == len(matrix[0]) and np.allclose(matrix_proxy[0], matrix):
+            print("Using cached inv cov matrix.")
+            return matrix_proxy[1]
+
     cov_matrix = np.cov(matrix, rowvar=False)
-    return np.linalg.inv(cov_matrix)
+    inv_cov_matrix = np.linalg.pinv(cov_matrix)
+    proxy.append((matrix, inv_cov_matrix))
+
+    return inv_cov_matrix
 
 
 def get_euclidean_distance(u: [float], v: [float]) -> float:
