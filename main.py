@@ -1,25 +1,25 @@
-#Importation librairies
-import seaborn as sns
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-from plot import Histogramme_comparaison
-#lecture du fichier csv
-df = pd.read_csv('resources/dataTp2.csv', sep = ',')
-#séparation des données en 6 tableaux différents pour chaque colonne
-df1 = df.iloc[:,0]
-df2 = df.iloc[:,1]
-df3 = df.iloc[:,2]
-df4 = df.iloc[:,3]
-df5 = df.iloc[:,4]
-df6 = df.iloc[:,5]
-df7 = df.iloc[:,6]
+###
+# |          Nom          | Matricule  |   CIP    |
+# |:---------------------:|:----------:|:--------:|
+# |   Alexandre Theisse   | 23 488 180 | thea1804 |
+# | Louis-Vincent Capelli | 23 211 533 | capl1101 |
+# |      Tom Sartori      | 23 222 497 | sart0701 |
+###
+
+import itertools
+
+import data_management as dm
+import plotting as pl
 
 
+# Question 1
 
-if __name__ == '__main__':
-#Affichage des données en histogramme 
-    Histogramme_comparaison()
+features = ["valence_intensity", "fear_intensity", "anger_intensity", "happiness_intensity", "sadness_intensity"]
+# All possible combinations of 2 features
+combinations = list(itertools.combinations(features, 2))
 
-
-
+# Plots distributions of all combinations of 2 features
+data = dm.get_all_users_as_df()
+for combi in combinations:
+    pl.plot_conjoint_representation(data, combi[0], combi[1])
+    # pl.plot_conjoint_representation(data, combi[0], combi[1], save=True, show=False)
