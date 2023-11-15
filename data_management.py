@@ -7,6 +7,7 @@
 ###
 
 import pandas as pd
+import umap
 
 def get_all_users():
     with open("data/dataTp2.csv", "r") as f:
@@ -28,6 +29,16 @@ def get_all_users_as_df():
 def get_one_column_as_df(column_name):
     df = pd.read_csv("data/dataTp2.csv")
     return df[column_name]
+
+def get_data_with_umap(data):
+    reducer = umap.UMAP(metric='euclidean')
+    data_cp = data.copy()
+    if "cluster" in data.columns:
+        data = data.drop(columns=["cluster"])
+    embedding = reducer.fit_transform(data)
+    data_cp["umap1"] = embedding[:, 0]
+    data_cp["umap2"] = embedding[:, 1]
+    return data_cp
 
 if __name__ == "__main__":
     print(get_all_users_as_df())

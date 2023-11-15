@@ -9,6 +9,8 @@
 from os import path
 import matplotlib.pyplot as plt
 import seaborn as sns
+import umap
+
 
 def plot_conjoint_representation(data, feature1, feature2, save=False, show=True):
     """
@@ -27,5 +29,32 @@ def plot_conjoint_representation(data, feature1, feature2, save=False, show=True
     if save:
         name = "conjoint_representation_" + feature1 + "_" + feature2 + ".png"
         plt.savefig(path.join("rapport", "img", name), bbox_inches='tight')
+    if show:
+        plt.show()
+
+def plot_clustered_data_with_umap(clustered_data_with_umap, save=False, show=True):
+    """
+    Plots a clustered data set using UMAP.
+    :param clustered_data: the clustered data to plot
+    """
+
+    k = len(clustered_data_with_umap["cluster"].unique())
+
+    # Plot
+    plt.figure()
+    sns.scatterplot(
+        x=clustered_data_with_umap["umap1"],
+        y=clustered_data_with_umap["umap2"],
+        hue=clustered_data_with_umap["cluster"],
+        palette=sns.color_palette("hls", len(clustered_data_with_umap["cluster"].unique())),
+        legend="full",
+        alpha=0.3
+    )
+    plt.title("UMAP representation of the clustered data with k = " + str(k))
+    plt.xlabel("UMAP 1")
+    plt.ylabel("UMAP 2")
+
+    if save:
+        plt.savefig(path.join("rapport", "img", "umap_" + str(k) + ".png"), bbox_inches='tight')
     if show:
         plt.show()
