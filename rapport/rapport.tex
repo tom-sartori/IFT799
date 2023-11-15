@@ -10,4 +10,141 @@
 
 \section*{Question 1}
 
+\section*{Question 2}
+
+\section*{Question 3}
+
+\subsection*{Mesure de séparation des clusters}
+Voici les résultats obtenus pour les 2 mesures de séparation des clusters
+pour les différents nombres de clusters.
+
+On constate que le score silhouette est maximal pour 2 clusters et
+diminue constamment par la suite. Même le score maximal (0.43) 
+est plus proche de 0 que de 1,
+ce qui indique que les clusters sont assez mal séparés. Les scores
+correspondants aux grands nombres de clusters sont encore plus faibles
+(proches de 0.2), ce qui indique un fort chevauchement entre les clusters.
+
+On constate également cette tendance à l'augmentation du chevauchement
+en observant les matrices d'overlaps. On remarque que les valeurs
+augmentent avec le nombre de clusters, ce qui indique que les clusters
+sont de plus en plus chevauchants. En effet, les meilleures valeurs
+d'overlaps obtenues entre 2 clusters sont supérieures à 1, ce qui indique
+que les clusters ne sont pas séparés et les moins bonnes valeurs
+sont de l'ordre de 3 ce qui indique un chevauchement important.
+
+\subsubsection*{2 clusters}
+
+Silhouette score : 0.43 \\\\
+Overlaps 2 à 2 :\\
+
+\begin{tabular}{|c|c|c|}
+\hline
+& C1 & C2 \\
+\hline
+C1 & - & 1.53 \\
+\hline
+C2 & - & - \\
+\hline
+\end{tabular}
+
+\subsubsection*{3 clusters}
+
+Silhouette score : 0.34 \\\\
+Overlaps 2 à 2 :\\
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+& C1 & C2 & C3 \\
+\hline
+C1 & - & 1.40 & 1.74 \\
+\hline
+C2 & - & - & 1.19 \\
+\hline
+C3 & - & - & - \\
+\hline
+\end{tabular}
+
+\subsubsection*{4 clusters}
+
+Silhouette score : 0.30 \\\\
+Overlaps 2 à 2 :\\
+
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+& C1 & C2 & C3 & C4 \\
+\hline
+C1 & - & 2.68 & 1.70 & 1.43 \\
+\hline
+C2 & - & - & 1.41 & 1.67 \\
+\hline
+C3 & - & - & - & 1.14 \\
+\hline
+C4 & - & - & - & - \\
+\hline
+\end{tabular}
+
+\subsubsection*{5 clusters}
+
+Silhouette score : 0.26 \\\\
+Overlaps 2 à 2 :\\
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+& C1 & C2 & C3 & C4 & C5 \\
+\hline
+C1 & - & 1.39 & 2.50 & 2.56 & 1.13 \\
+\hline
+C2 & - & - & 1.62 & 1.66 & 1.21 \\
+\hline
+C3 & - & - & - & 1.02 &2.09 \\
+\hline
+C4 & - & - & - & - & 2.14 \\
+\hline
+C5 & - & - & - & - & - \\
+\hline
+\end{tabular}
+
+\subsubsection*{6 clusters}
+
+Silhouette score : 0.22 \\\\
+Overlaps 2 à 2 :\\
+
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+& C1 & C2 & C3 & C4 & C5 & C6 \\
+\hline
+C1 & - & 1.25 & 2.32 & 2.97 & 1.04 & 1.30 \\
+\hline
+C2 & - & - & 1.71 & 2.14 & 1.31 & 1.03 \\
+\hline
+C3 & - & - & - & 1.18 & 2.45 & 1.64 \\
+\hline
+C4 & - & - & - & - & 3.15 & 2.04 \\
+\hline
+C5 & - & - & - & - & - & 1.36 \\
+\hline
+C6 & - & - & - & - & - & - \\
+\hline
+\end{tabular}
+
+\subsubsection*{7 clusters}
+
+Silhouette score : 0.20
+
+\subsubsection*{8 clusters}
+
+Silhouette score : 0.20
+
+\subsubsection*{9 clusters}
+
+Silhouette score : 0.19
+
+\subsubsection*{10 clusters}
+
+Silhouette score : 0.19
+
+\subsection*{Cas particulier des 3 clusters}
+
+
 \end{document}

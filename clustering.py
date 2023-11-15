@@ -15,7 +15,7 @@ def get_clustered_data_kmeans(k, data):
     :param k: the number of clusters
     :param data: the data to cluster
     """
-    # copy only the features we want to cluster
+    # Copy only the features we want to cluster
     data_to_cluster = data[["valence_intensity", "fear_intensity", "anger_intensity", "happiness_intensity", "sadness_intensity"]].copy()
     kmeans = KMeans(n_clusters=k, random_state=0).fit(data_to_cluster)
     data["cluster"] = kmeans.labels_
