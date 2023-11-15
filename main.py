@@ -33,5 +33,5 @@ data_with_umap = dm.get_data_with_umap(data)
 
 # Running k-means clustering on the data with k = 2, 3, ..., 10
 for k in range(2, 11):
-    clustered_data_with_umap = cl.get_clustered_data(k, data_with_umap)
+    clustered_data_with_umap = cl.get_clustered_data_kmeans(k, data_with_umap)
     pl.plot_clustered_data_with_umap(clustered_data_with_umap, save=True, show=False)

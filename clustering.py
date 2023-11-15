@@ -9,7 +9,7 @@
 from sklearn.cluster import KMeans
 
 
-def get_clustered_data(k, data):
+def get_clustered_data_kmeans(k, data):
     """
     Performs a k-means clustering on the data and returns data with an additional column "cluster".
     :param k: the number of clusters
