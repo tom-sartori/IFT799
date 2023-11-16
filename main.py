@@ -132,3 +132,47 @@ data = dm.get_all_users_as_df()
 #         print(f"Overlap (C{combi[0]+1}, C{combi[1]+1}): {me.overlap(cluster1_data, cluster2_data)}")
 #     print()
 #     print()
+
+##############
+# Question 5 #
+##############
+
+# # Printing precision, recall and F1-score for k = 3
+# # To ensure that we get the best results,
+# # we test every association of a cluster and a sentiment and keep the best one
+
+# print("K = 3")
+# clustered_data = cl.get_clustred_data_hierarchical(data, k=3, print_dendrogram=False)
+
+# # We generate all possible permutations of the clusters
+# perm = list(itertools.permutations(range(3), 3))
+
+# # Each permutation is tested with 
+# # the first cluster being associated with the -1 sentiment,
+# # the second cluster being associated with the 0 sentiment,
+# # and the third cluster being associated with the 1 sentiment
+# precisions = []
+# recalls = []
+# f1_scores = []
+# for p in perm:
+#     clustered_data_copy = clustered_data.copy()
+#     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[0], -1)
+#     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[1], 0)
+#     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[2], 1)
+    
+#     print(f"Permutation: Clusters {p} = sentiment (-1, 0, 1))")
+#     precisions.append(me.precision(clustered_data_copy))
+#     recalls.append(me.recall(clustered_data_copy))
+#     f1_scores.append(me.f1_score(clustered_data_copy))
+#     print(f"Precision: {precisions[-1]}")
+#     print(f"Recall: {recalls[-1]}")
+#     print(f"F1-score: {f1_scores[-1]}")
+#     print()
+
+# # We keep the permutation that gives the best f1-score
+# best_perm = perm[f1_scores.index(max(f1_scores))]
+# print(f"Best permutation: Clusters {best_perm} = sentiment (-1, 0, 1))")
+# print(f"Precision: {precisions[perm.index(best_perm)]}")
+# print(f"Recall: {recalls[perm.index(best_perm)]}")
+# print(f"F1-score: {f1_scores[perm.index(best_perm)]}")
+# print()
