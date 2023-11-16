@@ -1,4 +1,5 @@
 \documentclass{article}
+\usepackage{graphicx}
 
 \title{Sciences des données - TP2}
 \author{Alexandre Theisse \and Louis-Vincent Capelli \and Tom Sartori}
@@ -145,6 +146,189 @@ Silhouette score : 0.19
 Silhouette score : 0.19
 
 \subsection*{Cas particulier des 3 clusters}
+
+
+\section*{Question 4}
+
+\subsection*{Différentes valeurs de seuil}
+
+En utilisant un clustering hierarchique avec la distance euclidienne et 
+le lien de Ward, on obtient peut tester différentes valeurs de seuil pour
+obtenir un nombre de clusters donné. Voici les résultats obtenus pour les
+différentes valeurs de seuil testées.
+
+NB : Les résultats sont aussi mauvais en utilisant un lien simple ou
+moyen.
+
+\subsubsection*{Seuil = 18}
+Pour un seuil de 18, on obtient 2 clusters.\\
+Voici le dendrogramme obtenu :
+
+\begin{center}
+    \includegraphics[scale=0.2]{./img/dendrogram\_with\_threshold\_18\_2\_clusters.png}
+\end{center}
+
+\subsubsection*{Seuil = 12}
+Pour un seuil de 12, on obtient 3 clusters.\\
+Voici le dendrogramme obtenu :
+
+\begin{center}
+    \includegraphics[scale=0.2]{./img/dendrogram\_with\_threshold\_12\_3\_clusters.png}
+\end{center}
+
+\subsubsection*{Seuil = 9}
+Pour un seuil de 9, on obtient 4 clusters.\\
+Voici le dendrogramme obtenu :
+
+\begin{center}
+    \includegraphics[scale=0.2]{./img/dendrogram\_with\_threshold\_9\_4\_clusters.png}
+\end{center}
+
+\subsubsection*{Seuil = 8}
+Pour un seuil de 8, on obtient 5 clusters.\\
+Voici le dendrogramme obtenu :
+
+\begin{center}
+    \includegraphics[scale=0.2]{./img/dendrogram\_with\_threshold\_8\_5\_clusters.png}
+\end{center}
+
+\subsubsection*{Seuil = 6.2}
+Pour un seuil de 6.2, on obtient 6 clusters.\\
+Voici le dendrogramme obtenu :
+
+\begin{center}
+    \includegraphics[scale=0.2]{./img/dendrogram\_with\_threshold\_6.2\_6\_clusters.png}
+\end{center}
+
+\subsubsection*{Seuil = 6}
+Pour un seuil de 6, on obtient 7 clusters.\\
+Voici le dendrogramme obtenu :
+
+\begin{center}
+    \includegraphics[scale=0.2]{./img/dendrogram\_with\_threshold\_6\_7\_clusters.png}
+\end{center}
+
+\subsubsection*{Seuil = 5}
+Pour un seuil de 5, on obtient 8 clusters.\\
+Voici le dendrogramme obtenu :
+
+\begin{center}
+    \includegraphics[scale=0.2]{./img/dendrogram\_with\_threshold\_5\_8\_clusters.png}
+\end{center}
+
+\subsubsection*{Seuil = 4.5}
+Pour un seuil de 4.5, on obtient 9 clusters.\\
+Voici le dendrogramme obtenu :
+
+\begin{center}
+    \includegraphics[scale=0.2]{./img/dendrogram\_with\_threshold\_4.5\_9\_clusters.png}
+\end{center}
+
+\subsubsection*{Seuil = 3.63}
+Pour un seuil de 3.63, on obtient 10 clusters.\\
+Voici le dendrogramme obtenu :
+
+\begin{center}
+    \includegraphics[scale=0.2]{./img/dendrogram\_with\_threshold\_3.63\_10\_clusters.png}
+\end{center}
+
+
+\subsection*{Mesure de séparation des clusters}
+Voici les résultats obtenus pour les 2 mesures de séparation des clusters
+pour les différents nombres de clusters.
+
+On constate que le score silhouette est maximal pour 2 clusters et
+diminue constamment par la suite. Même le score maximal (0.45) 
+est plus proche de 0 que de 1,
+ce qui indique que les clusters sont assez mal séparés. Les scores
+correspondants aux grands nombres de clusters sont encore plus faibles
+(proches de 0.2), ce qui indique un fort chevauchement entre les clusters.
+
+On constate un overlap qui explose entre certains clusters. Par exemple,
+dans une configuration avec 2 clusters on obtient un overlap de 3667.46.
+\subsubsection*{Seuil = 18}
+Pour un seuil de 18, on obtient 2 clusters. Le score silhouette est de 0.45.\\\\
+Les overlaps 2 à 2 sont les suivants :\\
+
+\begin{tabular}{|c|c|c|}
+\hline
+& C1 & C2 \\
+\hline
+C1 & - & 3667.46 \\
+\hline
+C2 & - & - \\
+\hline
+\end{tabular}
+
+\subsubsection*{Seuil = 12}
+Pour un seuil de 12, on obtient 3 clusters. Le score silhouette est de 0.28.\\\\
+Les overlaps 2 à 2 sont les suivants :\\
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+& C1 & C2 & C3 \\
+\hline
+C1 & - & 3667.46 & 7802.60 \\
+\hline
+C2 & - & - & 1.41 \\
+\hline
+C3 & - & - & - \\
+\hline
+\end{tabular}
+
+\subsubsection*{Seuil = 9}
+
+Pour un seuil de 9, on obtient 4 clusters. Le score silhouette est de 0.25.\\\\
+Les overlaps 2 à 2 sont les suivants :\\
+
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+& C1 & C2 & C3 & C4 \\
+\hline
+C1 & - & 3667.46 & 7802.60 & 954.16 \\
+\hline
+C2 & - & - & 1.41 & 2.53 \\
+\hline
+C3 & - & - & - & 4.21 \\
+\hline
+C4 & - & - & - & - \\
+\hline
+\end{tabular}
+
+\subsubsection*{Seuil = 8}
+Pour un seuil de 8, on obtient 5 clusters. Le score silhouette est de 0.22.\\\\
+Les overlaps 2 à 2 sont les suivants :\\
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+& C1 & C2 & C3 & C4 & C5 \\
+\hline
+C1 & - & 1954.64 & 1695.18 & 7802.6 & 954.16 \\
+\hline
+C2 & - & - & 1.08 & 2.19 & 1.60 \\
+\hline
+C3 & - & - & - & 2.48 & 1.44 \\
+\hline
+C4 & - & - & - & - & 4.21 \\
+\hline
+C5 & - & - & - & - & - \\
+\hline
+\end{tabular}
+
+\subsubsection*{Seuil = 6.2}
+Pour un seuil de 6.2, on obtient 6 clusters. Le score silhouette est de 0.18.
+
+\subsubsection*{Seuil = 6}
+Pour un seuil de 6, on obtient 7 clusters. Le score silhouette est de 0.15.
+
+\subsubsection*{Seuil = 5}
+Pour un seuil de 5, on obtient 8 clusters. Le score silhouette est de 0.14.
+
+\subsubsection*{Seuil = 4.5}
+Pour un seuil de 4.5, on obtient 9 clusters. Le score silhouette est de 0.13.
+
+\subsubsection*{Seuil = 3.63}
+Pour un seuil de 3.63, on obtient 10 clusters. Le score silhouette est de 0.13.
 
 
 \end{document}

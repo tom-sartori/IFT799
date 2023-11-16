@@ -32,6 +32,24 @@ def plot_conjoint_representation(data, feature1, feature2, save=False, show=True
     if show:
         plt.show()
 
+def plot_conjoint_distribution(data, feature1, feature2, save=False, show=True):
+    """
+    Plots the conjoint distribution of 2 features as a jointplot.
+    :param data: the data to plot
+    :param feature1: the first feature
+    :param feature2: the second feature
+    """
+    sns.jointplot(x=feature1, y=feature2, data=data, kind="hist")
+    plt.title(f"Conjoint distribution of {feature1} and {feature2}. Correlation: {round(data[feature1].corr(data[feature2]), 2)}")
+    plt.xlabel(feature1)
+    plt.ylabel(feature2)
+    if save:
+        name = "conjoint_distribution_" + feature1 + "_" + feature2 + ".png"
+        plt.gcf().set_size_inches(10, 10)
+        plt.savefig(path.join("rapport", "img", name), bbox_inches='tight')
+    if show:
+        plt.show()
+
 def plot_clustered_data_with_umap(clustered_data_with_umap, save=False, show=True):
     """
     Plots a clustered data set using UMAP.
