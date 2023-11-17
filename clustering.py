@@ -22,8 +22,9 @@ def get_clustered_data_kmeans(k, data):
     # Copy only the features we want to cluster
     data_to_cluster = data[["valence_intensity", "fear_intensity", "anger_intensity", "happiness_intensity", "sadness_intensity"]].copy()
     kmeans = KMeans(n_clusters=k, random_state=0).fit(data_to_cluster)
-    data["cluster"] = kmeans.labels_
-    return data
+    data_cp = data.copy()
+    data_cp["cluster"] = kmeans.labels_
+    return data_cp
 
 def get_clustred_data_hierarchical(data, k=None, threshold=None, print_dendrogram=True, save_dendrogram=False):
     """
@@ -44,7 +45,8 @@ def get_clustred_data_hierarchical(data, k=None, threshold=None, print_dendrogra
     else:
         clusters = fcluster(Z, threshold, criterion="distance")
         name = f"_with_threshold_{threshold}_{max(clusters)}_clusters"
-    data["cluster"] = clusters
+    data_cp = data.copy()
+    data_cp["cluster"] = clusters
 
     # Save dendrogram
     if save_dendrogram:
@@ -64,5 +66,5 @@ def get_clustred_data_hierarchical(data, k=None, threshold=None, print_dendrogra
         dendrogram(Z, truncate_mode="level", p=5, color_threshold=threshold)
         plt.show()
 
-    return data
+    return data_cp
 
