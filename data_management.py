@@ -33,12 +33,13 @@ def get_one_column_as_df(column_name):
 def get_data_with_umap(data):
     reducer = umap.UMAP(metric='euclidean')
     data_cp = data.copy()
-    if "cluster" in data.columns:
-        data = data.drop(columns=["cluster"])
-    embedding = reducer.fit_transform(data)
-    data_cp["umap1"] = embedding[:, 0]
-    data_cp["umap2"] = embedding[:, 1]
-    return data_cp
+    data_cp = data_cp.drop(columns=["sentiment"])
+    if "cluster" in data_cp.columns:
+        data_cp = data_cp.drop(columns=["cluster"])
+    embedding = reducer.fit_transform(data_cp)
+    data["umap1"] = embedding[:, 0]
+    data["umap2"] = embedding[:, 1]
+    return data
 
 if __name__ == "__main__":
     print(get_all_users_as_df())
