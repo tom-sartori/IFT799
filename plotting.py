@@ -50,6 +50,28 @@ def plot_conjoint_distribution(data, feature1, feature2, save=False, show=True):
     if show:
         plt.show()
 
+def plot_sentiment_with_umap(data_with_umap, save=False, show=True):
+    """
+    Plots the sentiment of the data using UMAP.
+    :param data_with_umap: the data to plot
+    """
+    plt.figure()
+    sns.scatterplot(
+        x=data_with_umap["umap1"],
+        y=data_with_umap["umap2"],
+        hue=data_with_umap["sentiment"],
+        palette=sns.color_palette("hls", len(data_with_umap["sentiment"].unique())),
+        legend="full",
+        alpha=0.3
+    )
+    plt.title("UMAP representation of the sentiment")
+    plt.xlabel("UMAP 1")
+    plt.ylabel("UMAP 2")
+    if save:
+        plt.savefig(path.join("rapport", "img", "umap_sentiment.png"), bbox_inches='tight')
+    if show:
+        plt.show()
+
 def plot_clustered_data_with_umap(clustered_data_with_umap, save=False, show=True):
     """
     Plots a clustered data set using UMAP.
