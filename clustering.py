@@ -46,7 +46,7 @@ def get_clustred_data_hierarchical(data, k=None, threshold=None, print_dendrogra
         clusters = fcluster(Z, threshold, criterion="distance")
         name = f"_with_threshold_{threshold}_{max(clusters)}_clusters"
     data_cp = data.copy()
-    data_cp["cluster"] = clusters
+    data_cp["cluster"] = clusters - 1
 
     # Save dendrogram
     if save_dendrogram:
