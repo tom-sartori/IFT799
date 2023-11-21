@@ -107,7 +107,7 @@ def contengency_table(clustered_data):
     
     # Filling the contengency table
     for _, user in clustered_data.iterrows():
-        contengency_table[user["sentiment"]+1][user["cluster"]+1] += 1
+        contengency_table[int(user["sentiment"]+1)][int(user["cluster"]+1)] += 1
 
     return contengency_table
 
