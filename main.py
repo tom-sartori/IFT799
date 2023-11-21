@@ -90,8 +90,8 @@ for p in perm:
     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[2], 1)
     
     print(f"Permutation: Clusters {p} = sentiment (-1, 0, 1))")
-    contengency_table = me.contengency_table(clustered_data_copy)
-    confusion_matrix = me.confusion_matrix(contengency_table)
+    contingency_table = me.contingency_table(clustered_data_copy)
+    confusion_matrix = me.confusion_matrix(contingency_table)
     print(f"Confusion matrix:\n{confusion_matrix}")
     precisions.append(me.precision(confusion_matrix))
     recalls.append(me.recall(confusion_matrix))
