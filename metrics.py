@@ -6,6 +6,7 @@
 # |      Tom Sartori      | 23 222 497 | sart0701 |
 ###
 
+import itertools
 import math
 import sklearn.metrics as skm
 
@@ -91,26 +92,93 @@ def silhouette_score(clustered_data):
     features = ["valence_intensity", "fear_intensity", "anger_intensity", "happiness_intensity", "sadness_intensity"]
     return skm.silhouette_score(clustered_data[features], clustered_data["cluster"])
 
+def contengency_table(clustered_data):
+    """
+    Computes the contengency table of a clustering. 
+    The table is a 3x3 matrix with the following structure:
+    | ------------ | cluster -1 | cluster 0 | cluster 1 |
+    | sentiment -1 |            |           |           |
+    | sentiment 0  |            |           |           |
+    | sentiment 1  |            |           |           |
+    :param clustered_data: the data of the clustering
+    """
+    # Creating a contengency table
+    contengency_table = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    
+    # Filling the contengency table
+    for _, user in clustered_data.iterrows():
+        contengency_table[user["sentiment"]+1][user["cluster"]+1] += 1
+
+    return contengency_table
+
+def true_positive(contengency_table):
+    """
+    Computes the true positives of a clustering. When evaluating a clustering, true positives are the users that are the pairs of users that are in the same cluster and have the same sentiment.
+    :param contengency_table: the contengency table of the clustering
+    """
+    tp = 0
+    for i in range(len(contengency_table)):
+        for j in range(len(contengency_table)):
+            tp += len(list(itertools.combinations(range(contengency_table[i][j]), 2)))
+    return tp
+
+def false_negative(contengency_table):
+    """
+    Computes the false negatives of a clustering. When evaluating a clustering, false negatives are the pairs of users that are in different clusters but have the same sentiment.
+    :param contengency_table: the contengency table of the clustering
+    """
+    fn = 0
+    for j in range(len(contengency_table)):
+        for i in range(len(contengency_table)):
+            for k in range(i+1, len(contengency_table)):
+                fn += contengency_table[i][j] * contengency_table[k][j]
+    return fn
+
+def total_positives(contengency_table):
+    """
+    Computes the total positives of a clustering. When evaluating a clustering, total positives are the pairs of users that have the same sentiment.
+    :param contengency_table: the contengency table of the clustering
+    """
+    total_positives = 0
+    for i in range(len(contengency_table)):
+        nb_users_with_sentiment = sum(contengency_table[i])
+        total_positives += len(list(itertools.combinations(range(nb_users_with_sentiment), 2)))
+    return total_positives
+
+def total_negatives(contengency_table):
+    """
+    Computes the total negatives of a clustering. When evaluating a clustering, total negatives are the pairs of users that have different sentiments.
+    :param contengency_table: the contengency table of the clustering
+    """
+    total_users_with_sentiment = [sum(contengency_table[i]) for i in range(len(contengency_table))]
+    total_negatives = 0
+    for i in range(len(total_users_with_sentiment)):
+        for j in range(i+1, len(total_users_with_sentiment)):
+            total_negatives += total_users_with_sentiment[i] * total_users_with_sentiment[j]
+    return total_negatives
+
+def confusion_matrix(contengency_table):
+    """
+    Computes the confusion matrix of a clustering sorting all pairs of users between true positives, false positives, true negatives and false negatives.
+    The matrix is a 2x2 matrix with the following structure:
+    | TP | FN |
+    | FP | TN |
+    :param clustered_data: the data of the clustering
+    """
+    tp = true_positive(contengency_table)
+    fn = false_negative(contengency_table)
+    fp = total_positives(contengency_table) - tp
+    tn = total_negatives(contengency_table) - fn
+    return [[tp, fn], [fp, tn]]
+    
+
 def precision(clustered_data):
     """
     Computes the precision of a clustering.
     :param clustered_data: the data of the clustering (with the cluster and sentiment columns having the same values)
     """
-    # When evaluating a clustering, true positives are the users that are the pairs of users that are in the same cluster and have the same sentiment.
-    tp = 0
-    # When evaluating a clustering, false positives are the pairs of users that are in the same cluster but have different sentiments.
-    fp = 0
+    tp = true_positive(contengency_table(clustered_data))
 
-    # Testing every pair of users (avoiding duplicates)
-    for i in range(len(clustered_data)):
-        print(f"{i}/{len(clustered_data)}")
-        for j in range(i+1, len(clustered_data)):
-            if clustered_data.iloc[i]["cluster"] == clustered_data.iloc[j]["cluster"]:
-                if clustered_data.iloc[i]["sentiment"] == clustered_data.iloc[j]["sentiment"]:
-                    tp += 1
-                else:
-                    fp += 1
-    return tp/(tp+fp)
 
 def recall(clustered_data):
     """
@@ -213,3 +281,10 @@ if __name__ == "__main__":
     avg_distance /= 25
     print(f"Average distance: {avg_distance}")
     print()
+
+    
+    print("Testing metrics on a clustering with 3 clusters")
+    table = [[5, 1, 0], [1, 4, 1], [2, 0, 3]]
+    # table = [[5, 1, 1], [1, 6, 0], [0, 2, 4]]
+    print(f"Contengency table: {table}")
+    print(f"Confusion matrix: {confusion_matrix(table)}")
