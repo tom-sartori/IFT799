@@ -53,14 +53,16 @@ data = dm.get_all_users_as_df()
 # # Running k-means clustering on the data with k = 2, 3, ..., 10
 # for k in range(2, 11):
 #     clustered_data = cl.get_clustered_data_kmeans(k, data)
-# 
+
 #     # Printing the silhouette score and the overlap for each combination of 2 clusters
 #     print(f"K = {k}")
-#     print(f"Silhouette score: {me.silhouette_score(clustered_data)}\n")
+#     print(f"Silhouette score: {round(me.silhouette_score(clustered_data), 2)}\n")
+#     if k > 5:
+#         continue
 #     for combi in list(itertools.combinations(range(k), 2)):
 #         cluster1_data = clustered_data[clustered_data["cluster"] == combi[0]]
 #         cluster2_data = clustered_data[clustered_data["cluster"] == combi[1]]
-#         print(f"Overlap (C{combi[0]+1}, C{combi[1]+1}): {me.overlap(cluster1_data, cluster2_data)}")
+#         print(f"Overlap (C{combi[0]+1}, C{combi[1]+1}): {round(me.overlap(cluster1_data, cluster2_data), 2)}")
 #     print()
 #     print()
 
