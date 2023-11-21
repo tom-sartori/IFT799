@@ -172,42 +172,33 @@ def confusion_matrix(contengency_table):
     return [[tp, fn], [fp, tn]]
     
 
-def precision(clustered_data):
+def precision(confusion_matrix):
     """
     Computes the precision of a clustering.
     :param clustered_data: the data of the clustering (with the cluster and sentiment columns having the same values)
     """
-    tp = true_positive(contengency_table(clustered_data))
+    tp = confusion_matrix[0][0]
+    fp = confusion_matrix[1][0]
+    return tp/(tp+fp)
 
 
-def recall(clustered_data):
+def recall(confusion_matrix):
     """
     Computes the recall of a clustering.
     :param clustered_data: the data of the clustering (with the cluster and sentiment columns having the same values)
     """
-    # When evaluating a clustering, true positives are the users that are the pairs of users that are in the same cluster and have the same sentiment.
-    tp = 0
-    # When evaluating a clustering, false negatives are the pairs of users that are in different clusters but have the same sentiment.
-    fn = 0
-    
-    # Testing every pair of users (avoiding duplicates)
-    for i in range(len(clustered_data)):
-        for j in range(i+1, len(clustered_data)):
-            if clustered_data.iloc[i]["sentiment"] == clustered_data.iloc[j]["sentiment"]:
-                if clustered_data.iloc[i]["cluster"] == clustered_data.iloc[j]["cluster"]:
-                    tp += 1
-                else:
-                    fn += 1
+    tp = confusion_matrix[0][0]
+    fn = confusion_matrix[0][1]
     return tp/(tp+fn)
 
-def f1_score(clustered_data):
+def f1_score(confusion_matrix):
     """
     Computes the F1-score of a clustering.
     :param clustered_data: the data of the clustering (with the cluster and sentiment columns having the same values)
     """
-    r = recall(clustered_data)
-    p = precision(clustered_data)
-    return  2 * (p * r) / (p + r)
+    p = precision(confusion_matrix)
+    r = recall(confusion_matrix)
+    return 2*p*r/(p+r)
 
 if __name__ == "__main__":
     # 5 positive users
