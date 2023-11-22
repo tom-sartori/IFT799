@@ -57,28 +57,10 @@ for k in range(2, 11):
     # Printing the silhouette score and the overlap for each combination of 2 clusters
     print(f"K = {k}")
     print(f"Silhouette score: {round(me.silhouette_score(clustered_data), 2)}\n")
-    print("Overlaps 2 à 2 : \\\\\n")
-    print(f"begin{{tabular}}{{|c|{'c|' * k}}}")
-    print("\\hline")
-    if k > 5:
-        continue
-    for i in range(k):
-        print(f"& C{i+1}", end=" ")
-    print("\\\\")
-    print("\\hline")
-    for i in range(k):
-        print(f"C{i+1}", end=" ")
-        for j in range(k):
-            if j <= i:
-                print(f"& -", end=" ")
-                continue
-            cluster1_data = clustered_data[clustered_data["cluster"] == i]
-            cluster2_data = clustered_data[clustered_data["cluster"] == j]
-            print(f"& {round(me.overlap(cluster1_data, cluster2_data), 2)}", end=" ")
-        print("\\\\")
-        print("\\hline")
-    print("\\end{tabular}")
-    print()
+    if k < 5:
+        print("Overlaps 2 à 2 : \\\\\n")
+        pl.print_overlap_table(clustered_data)
+        print()
     print()
 
 # # Printing precision, recall and F1-score for k = 3

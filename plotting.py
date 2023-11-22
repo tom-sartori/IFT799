@@ -9,7 +9,7 @@
 from os import path
 import matplotlib.pyplot as plt
 import seaborn as sns
-import umap
+import metrics as me
 
 
 def plot_conjoint_representation(data, feature1, feature2, save=False, show=True):
@@ -98,3 +98,28 @@ def plot_clustered_data_with_umap(clustered_data_with_umap, save=False, show=Tru
         plt.savefig(path.join("rapport", "img", "umap_" + str(k) + ".png"), bbox_inches='tight')
     if show:
         plt.show()
+
+def print_overlap_table(clustered_data):
+    """
+    Prints the overlap table for the clustered data in LaTeX format.
+    :param clustered_data: the clustered data
+    """
+    k = len(clustered_data["cluster"].unique())
+    print(f"begin{{tabular}}{{|c|{'c|' * k}}}")
+    print("\\hline")
+    for i in range(k):
+        print(f"& C{i+1}", end=" ")
+    print("\\\\")
+    print("\\hline")
+    for i in range(k):
+        print(f"C{i+1}", end=" ")
+        for j in range(k):
+            if j <= i:
+                print(f"& -", end=" ")
+                continue
+            cluster1_data = clustered_data[clustered_data["cluster"] == i]
+            cluster2_data = clustered_data[clustered_data["cluster"] == j]
+            print(f"& {round(me.overlap(cluster1_data, cluster2_data), 2)}", end=" ")
+        print("\\\\")
+        print("\\hline")
+    print("\\end{tabular}")
