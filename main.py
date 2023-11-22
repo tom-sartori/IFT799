@@ -50,64 +50,79 @@ data = dm.get_all_users_as_df()
 # Question 3 #
 ##############
 
-# # Running k-means clustering on the data with k = 2, 3, ..., 10
-# for k in range(2, 11):
-#     clustered_data = cl.get_clustered_data_kmeans(k, data)
+# Running k-means clustering on the data with k = 2, 3, ..., 10
+for k in range(2, 11):
+    clustered_data = cl.get_clustered_data_kmeans(k, data)
 
-#     # Printing the silhouette score and the overlap for each combination of 2 clusters
-#     print(f"K = {k}")
-#     print(f"Silhouette score: {round(me.silhouette_score(clustered_data), 2)}\n")
-#     if k > 5:
-#         continue
-#     for combi in list(itertools.combinations(range(k), 2)):
-#         cluster1_data = clustered_data[clustered_data["cluster"] == combi[0]]
-#         cluster2_data = clustered_data[clustered_data["cluster"] == combi[1]]
-#         print(f"Overlap (C{combi[0]+1}, C{combi[1]+1}): {round(me.overlap(cluster1_data, cluster2_data), 2)}")
-#     print()
-#     print()
-
-# Printing precision, recall and F1-score for k = 3
-# To ensure that we get the best results,
-# we test every association of a cluster and a sentiment and keep the best one
-
-print("K = 3")
-clustered_data = cl.get_clustered_data_kmeans(3, data)
-
-# We generate all possible permutations of the clusters
-perm = list(itertools.permutations(range(3), 3))
-
-# Each permutation is tested with 
-# the first cluster being associated with the -1 sentiment,
-# the second cluster being associated with the 0 sentiment,
-# and the third cluster being associated with the 1 sentiment
-precisions = []
-recalls = []
-f1_scores = []
-for p in perm:
-    clustered_data_copy = clustered_data.copy()
-    clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[0], -1)
-    clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[1], 0)
-    clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[2], 1)
-    
-    print(f"Permutation: Clusters {p} = sentiment (-1, 0, 1))")
-    contingency_table = me.contingency_table(clustered_data_copy)
-    confusion_matrix = me.confusion_matrix(contingency_table)
-    print(f"Confusion matrix:\n{confusion_matrix}")
-    precisions.append(me.precision(confusion_matrix))
-    recalls.append(me.recall(confusion_matrix))
-    f1_scores.append(me.f1_score(confusion_matrix))
-    print(f"Precision: {precisions[-1]}")
-    print(f"Recall: {recalls[-1]}")
-    print(f"F1-score: {f1_scores[-1]}")
+    # Printing the silhouette score and the overlap for each combination of 2 clusters
+    print(f"K = {k}")
+    print(f"Silhouette score: {round(me.silhouette_score(clustered_data), 2)}\n")
+    print("Overlaps 2 à 2 : \\\\\n")
+    print(f"begin{{tabular}}{{|c|{'c|' * k}}}")
+    print("\\hline")
+    if k > 5:
+        continue
+    for i in range(k):
+        print(f"& C{i+1}", end=" ")
+    print("\\\\")
+    print("\\hline")
+    for i in range(k):
+        print(f"C{i+1}", end=" ")
+        for j in range(k):
+            if j <= i:
+                print(f"& -", end=" ")
+                continue
+            cluster1_data = clustered_data[clustered_data["cluster"] == i]
+            cluster2_data = clustered_data[clustered_data["cluster"] == j]
+            print(f"& {round(me.overlap(cluster1_data, cluster2_data), 2)}", end=" ")
+        print("\\\\")
+        print("\\hline")
+    print("\\end{tabular}")
+    print()
     print()
 
-# We keep the permutation that gives the best f1-score
-best_perm = perm[f1_scores.index(max(f1_scores))]
-print(f"Best permutation: Clusters {best_perm} = sentiment (-1, 0, 1))")
-print(f"Precision: {precisions[perm.index(best_perm)]}")
-print(f"Recall: {recalls[perm.index(best_perm)]}")
-print(f"F1-score: {f1_scores[perm.index(best_perm)]}")
-print()
+# # Printing precision, recall and F1-score for k = 3
+# # To ensure that we get the best results,
+# # we test every association of a cluster and a sentiment and keep the best one
+
+# print("K = 3")
+# clustered_data = cl.get_clustered_data_kmeans(3, data)
+
+# # We generate all possible permutations of the clusters
+# perm = list(itertools.permutations(range(3), 3))
+
+# # Each permutation is tested with 
+# # the first cluster being associated with the -1 sentiment,
+# # the second cluster being associated with the 0 sentiment,
+# # and the third cluster being associated with the 1 sentiment
+# precisions = []
+# recalls = []
+# f1_scores = []
+# for p in perm:
+#     clustered_data_copy = clustered_data.copy()
+#     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[0], -1)
+#     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[1], 0)
+#     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[2], 1)
+    
+#     print(f"Permutation: Clusters {p} = sentiment (-1, 0, 1))")
+#     contingency_table = me.contingency_table(clustered_data_copy)
+#     confusion_matrix = me.confusion_matrix(contingency_table)
+#     print(f"Confusion matrix:\n{confusion_matrix}")
+#     precisions.append(me.precision(confusion_matrix))
+#     recalls.append(me.recall(confusion_matrix))
+#     f1_scores.append(me.f1_score(confusion_matrix))
+#     print(f"Precision: {precisions[-1]}")
+#     print(f"Recall: {recalls[-1]}")
+#     print(f"F1-score: {f1_scores[-1]}")
+#     print()
+
+# # We keep the permutation that gives the best f1-score
+# best_perm = perm[f1_scores.index(max(f1_scores))]
+# print(f"Best permutation: Clusters {best_perm} = sentiment (-1, 0, 1))")
+# print(f"Precision: {precisions[perm.index(best_perm)]}")
+# print(f"Recall: {recalls[perm.index(best_perm)]}")
+# print(f"F1-score: {f1_scores[perm.index(best_perm)]}")
+# print()
 
 ##############
 # Question 4 #
