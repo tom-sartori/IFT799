@@ -31,6 +31,8 @@ def cluster_centroid(cluster_data):
     for _, user in cluster_data.iterrows():
         for feature in ["valence_intensity", "fear_intensity", "anger_intensity", "happiness_intensity", "sadness_intensity"]:
             centroid[feature] += user[feature]
+    for feature in ["valence_intensity", "fear_intensity", "anger_intensity", "happiness_intensity", "sadness_intensity"]:
+        centroid[feature] /= len(cluster_data)
     return centroid
 
 def intra_cluster_distance(cluster_data):
@@ -74,7 +76,10 @@ def overlap(cluster1_data, cluster2_data):
     :param cluster1_data: the data of the first cluster
     :param cluster2_data: the data of the second cluster
     """
-    return (intra_cluster_distance(cluster1_data) + intra_cluster_distance(cluster2_data))/(2*inter_cluster_distance(cluster1_data, cluster2_data))
+    intra1 = intra_cluster_distance(cluster1_data)
+    intra2 = intra_cluster_distance(cluster2_data)
+    inter = inter_cluster_distance(cluster1_data, cluster2_data)
+    return (intra1 + intra2)/(2*inter)
 
 def are_clusters_separated(cluster1_data, cluster2_data):
     """
