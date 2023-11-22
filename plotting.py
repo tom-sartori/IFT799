@@ -105,7 +105,7 @@ def print_overlap_table(clustered_data):
     :param clustered_data: the clustered data
     """
     k = len(clustered_data["cluster"].unique())
-    print(f"begin{{tabular}}{{|c|{'c|' * k}}}")
+    print(f"\\begin{{tabular}}{{|c|{'c|' * k}}}")
     print("\\hline")
     for i in range(k):
         print(f"& C{i+1}", end=" ")

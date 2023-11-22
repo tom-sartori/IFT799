@@ -57,7 +57,7 @@ for k in range(2, 11):
     # Printing the silhouette score and the overlap for each combination of 2 clusters
     print(f"K = {k}")
     print(f"Silhouette score: {round(me.silhouette_score(clustered_data), 2)}\n")
-    if k < 5:
+    if k <= 5:
         print("Overlaps 2 à 2 : \\\\\n")
         pl.print_overlap_table(clustered_data)
         print()
