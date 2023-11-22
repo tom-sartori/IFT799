@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1700175380 "c:/Users/LV/OneDrive/Documents/_Cours/UdS/SD/TP/IFT799/rapport/rapport.tex" "rapport.pdf" "rapport" 1700175383 0
-  "c:/Users/LV/OneDrive/Documents/_Cours/UdS/SD/TP/IFT799/rapport/rapport.tex" 1700175379 8483 3d3bf0b8761c7fdd237a083fdae9d0f3 ""
+["pdflatex"] 1700674845 "c:/Users/LV/OneDrive/Documents/_Cours/UdS/SD/TP/IFT799/rapport/rapport.tex" "rapport.pdf" "rapport" 1700674847 0
+  "c:/Users/LV/OneDrive/Documents/_Cours/UdS/SD/TP/IFT799/rapport/rapport.tex" 1700674844 8081 a54ed19f871bfcf3fc4ca32d3b3bf50f ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1693268951 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1693268063 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1693268063 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -44,8 +44,8 @@
   "img/dendrogram_with_threshold_6_7_clusters.png" 1700158856 45452 dfbb1382cec05140d20935b159665d50 ""
   "img/dendrogram_with_threshold_8_5_clusters.png" 1700158914 45331 aa358f6069cf4c4d77f887d025d82fa6 ""
   "img/dendrogram_with_threshold_9_4_clusters.png" 1700158942 44806 9e947a404cfd6f53497c77e52514c950 ""
-  "rapport.aux" 1700175383 33 06c322e1d88c4778ac780ba5e7d05c77 "pdflatex"
-  "rapport.tex" 1700175379 8483 3d3bf0b8761c7fdd237a083fdae9d0f3 ""
+  "rapport.aux" 1700674847 33 06c322e1d88c4778ac780ba5e7d05c77 "pdflatex"
+  "rapport.tex" 1700674844 8081 a54ed19f871bfcf3fc4ca32d3b3bf50f ""
   (generated)
   "rapport.aux"
   "rapport.log"
