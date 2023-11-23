@@ -20,162 +20,162 @@ data = dm.get_all_users_as_df()
 # Question 1 #
 ##############
 
-features = ["valence_intensity", "fear_intensity", "anger_intensity", "happiness_intensity", "sadness_intensity"]
-# All possible combinations of 2 features
-combinations = list(itertools.combinations(features, 2))
+# features = ["valence_intensity", "fear_intensity", "anger_intensity", "happiness_intensity", "sadness_intensity"]
+# # All possible combinations of 2 features
+# combinations = list(itertools.combinations(features, 2))
 
-# Plots distributions of all combinations of 2 features
-for combi in combinations:
-    # pl.plot_conjoint_representation(data, combi[0], combi[1])
-    pl.plot_conjoint_representation(data, combi[0], combi[1], save=True, show=False)
-    pl.plot_conjoint_distribution(data, combi[0], combi[1], save=True, show=False)
-    continue
+# # Plots distributions of all combinations of 2 features
+# for combi in combinations:
+#     # pl.plot_conjoint_representation(data, combi[0], combi[1])
+#     pl.plot_conjoint_representation(data, combi[0], combi[1], save=True, show=False)
+#     pl.plot_conjoint_distribution(data, combi[0], combi[1], save=True, show=False)
+#     continue
 
 
 ##############
 # Question 2 #
 ##############
 
-# Running UMAP on the data to plot it
-data_with_umap = dm.get_data_with_umap(data)
+# # Running UMAP on the data to plot it
+# data_with_umap = dm.get_data_with_umap(data)
 
-# Running k-means clustering on the data with k = 2, 3, ..., 10
-for k in range(2, 11):
-    clustered_data_with_umap = cl.get_clustered_data_kmeans(k, data_with_umap)
-    pl.plot_clustered_data_with_umap(clustered_data_with_umap, save=True, show=False)
-    continue
+# # Running k-means clustering on the data with k = 2, 3, ..., 10
+# for k in range(2, 11):
+#     clustered_data_with_umap = cl.get_clustered_data_kmeans(k, data_with_umap)
+#     pl.plot_clustered_data_with_umap(clustered_data_with_umap, save=True, show=False)
+#     continue
 
 
 ##############
 # Question 3 #
 ##############
 
-# Running k-means clustering on the data with k = 2, 3, ..., 10
-for k in range(2, 11):
-    clustered_data = cl.get_clustered_data_kmeans(k, data)
+# # Running k-means clustering on the data with k = 2, 3, ..., 10
+# for k in range(2, 11):
+#     clustered_data = cl.get_clustered_data_kmeans(k, data)
 
-    # Printing the silhouette score and the overlap for each combination of 2 clusters
-    print(f"K = {k}")
-    print(f"Silhouette score: {round(me.silhouette_score(clustered_data), 2)}\n")
-    if k <= 5:
-        print("Overlaps 2 à 2 : \\\\\n")
-        pl.print_overlap_table(clustered_data)
-        print()
-    print()
+#     # Printing the silhouette score and the overlap for each combination of 2 clusters
+#     print(f"K = {k}")
+#     print(f"Silhouette score: {round(me.silhouette_score(clustered_data), 2)}\n")
+#     if k <= 5:
+#         print("Overlaps 2 à 2 : \\\\\n")
+#         pl.print_overlap_table(clustered_data)
+#         print()
+#     print()
 
-# Printing precision, recall and F1-score for k = 3
-# To ensure that we get the best results,
-# we test every association of a cluster and a sentiment and keep the best one
+# # Printing precision, recall and F1-score for k = 3
+# # To ensure that we get the best results,
+# # we test every association of a cluster and a sentiment and keep the best one
 
-print("K = 3")
-clustered_data = cl.get_clustered_data_kmeans(3, data)
+# print("K = 3")
+# clustered_data = cl.get_clustered_data_kmeans(3, data)
 
-# We generate all possible permutations of the clusters
-perm = list(itertools.permutations(range(3), 3))
+# # We generate all possible permutations of the clusters
+# perm = list(itertools.permutations(range(3), 3))
 
-# Each permutation is tested with 
-# the first cluster being associated with the -1 sentiment,
-# the second cluster being associated with the 0 sentiment,
-# and the third cluster being associated with the 1 sentiment
-precisions = []
-recalls = []
-f1_scores = []
-for p in perm:
-    clustered_data_copy = clustered_data.copy()
-    clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[0], -1)
-    clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[1], 0)
-    clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[2], 1)
+# # Each permutation is tested with 
+# # the first cluster being associated with the -1 sentiment,
+# # the second cluster being associated with the 0 sentiment,
+# # and the third cluster being associated with the 1 sentiment
+# precisions = []
+# recalls = []
+# f1_scores = []
+# for p in perm:
+#     clustered_data_copy = clustered_data.copy()
+#     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[0], -1)
+#     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[1], 0)
+#     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[2], 1)
     
-    print(f"Permutation: Clusters {p} = sentiment (-1, 0, 1))")
-    contingency_table = me.contingency_table(clustered_data_copy)
-    confusion_matrix = me.confusion_matrix(contingency_table)
-    print(f"Confusion matrix:\n{confusion_matrix}")
-    precisions.append(me.precision(confusion_matrix))
-    recalls.append(me.recall(confusion_matrix))
-    f1_scores.append(me.f1_score(confusion_matrix))
-    print(f"Precision: {precisions[-1]}")
-    print(f"Recall: {recalls[-1]}")
-    print(f"F1-score: {f1_scores[-1]}")
-    print()
+#     print(f"Permutation: Clusters {p} = sentiment (-1, 0, 1))")
+#     contingency_table = me.contingency_table(clustered_data_copy)
+#     confusion_matrix = me.confusion_matrix(contingency_table)
+#     print(f"Confusion matrix:\n{confusion_matrix}")
+#     precisions.append(me.precision(confusion_matrix))
+#     recalls.append(me.recall(confusion_matrix))
+#     f1_scores.append(me.f1_score(confusion_matrix))
+#     print(f"Precision: {precisions[-1]}")
+#     print(f"Recall: {recalls[-1]}")
+#     print(f"F1-score: {f1_scores[-1]}")
+#     print()
 
-# We keep the permutation that gives the best f1-score
-best_perm = perm[f1_scores.index(max(f1_scores))]
-print(f"Best permutation: Clusters {best_perm} = sentiment (-1, 0, 1))")
-print(f"Precision: {precisions[perm.index(best_perm)]}")
-print(f"Recall: {recalls[perm.index(best_perm)]}")
-print(f"F1-score: {f1_scores[perm.index(best_perm)]}")
-print()
+# # We keep the permutation that gives the best f1-score
+# best_perm = perm[f1_scores.index(max(f1_scores))]
+# print(f"Best permutation: Clusters {best_perm} = sentiment (-1, 0, 1))")
+# print(f"Precision: {precisions[perm.index(best_perm)]}")
+# print(f"Recall: {recalls[perm.index(best_perm)]}")
+# print(f"F1-score: {f1_scores[perm.index(best_perm)]}")
+# print()
 
 ##############
 # Question 4 #
 ##############
 
-# Threshold = 3.63 : 10 clusters
-# Threshold = 4.5 :  9 clusters
-# Threshold = 5 :    8 clusters
-# Threshold = 6 :    7 clusters
-# Threshold = 6.2 :  6 clusters
-# Threshold = 8 :    5 clusters
-# Threshold = 9 :    4 clusters
-# Threshold = 12 :   3 clusters
-# Threshold = 18 :   2 clusters
+# # Threshold = 3.63 : 10 clusters
+# # Threshold = 4.5 :  9 clusters
+# # Threshold = 5 :    8 clusters
+# # Threshold = 6 :    7 clusters
+# # Threshold = 6.2 :  6 clusters
+# # Threshold = 8 :    5 clusters
+# # Threshold = 9 :    4 clusters
+# # Threshold = 12 :   3 clusters
+# # Threshold = 18 :   2 clusters
 
-# Running hierarchical clustering on the data with different thresholds
-for threshold in [18, 12, 9, 8, 6.2, 6, 5, 4.5, 3.63]:
-    clustered_data = cl.get_clustred_data_hierarchical(data, threshold=threshold, print_dendrogram=False)
+# # Running hierarchical clustering on the data with different thresholds
+# for i, threshold in enumerate([18, 12, 9, 8, 6.2, 6, 5, 4.5, 3.63]):
+#     clustered_data = cl.get_clustred_data_hierarchical(data, threshold=threshold, print_dendrogram=False)
     
-    # Printing the silhouette score and the overlap for each combination of 2 clusters
-    print(f"Threshold = {threshold}")
-    print(f"Silhouette score: {round(me.silhouette_score(clustered_data), 2)}\n")
-    if threshold <= 6:
-        print("Overlaps 2 à 2 : \\\\\n")
-        pl.print_overlap_table(clustered_data)
-        print()
-    print()
+#     # Printing the silhouette score and the overlap for each combination of 2 clusters
+#     print(f"Threshold = {threshold}")
+#     print(f"Silhouette score: {round(me.silhouette_score(clustered_data), 2)}\n")
+#     if i <= 4:
+#         print("Overlaps 2 à 2 : \\\\\n")
+#         pl.print_overlap_table(clustered_data)
+#         print()
+#     print()
 
 ##############
 # Question 5 #
 ##############
 
-# Printing precision, recall and F1-score for k = 3
-# To ensure that we get the best results,
-# we test every association of a cluster and a sentiment and keep the best one
+# # Printing precision, recall and F1-score for k = 3
+# # To ensure that we get the best results,
+# # we test every association of a cluster and a sentiment and keep the best one
 
-print("K = 3")
-clustered_data = cl.get_clustred_data_hierarchical(data, k=3, print_dendrogram=False)
+# print("K = 3")
+# clustered_data = cl.get_clustred_data_hierarchical(data, k=3, print_dendrogram=False)
 
-# We generate all possible permutations of the clusters
-perm = list(itertools.permutations(range(3), 3))
+# # We generate all possible permutations of the clusters
+# perm = list(itertools.permutations(range(3), 3))
 
-# Each permutation is tested with 
-# the first cluster being associated with the -1 sentiment,
-# the second cluster being associated with the 0 sentiment,
-# and the third cluster being associated with the 1 sentiment
-precisions = []
-recalls = []
-f1_scores = []
-for p in perm:
-    clustered_data_copy = clustered_data.copy()
-    clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[0], -1)
-    clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[1], 0)
-    clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[2], 1)
+# # Each permutation is tested with 
+# # the first cluster being associated with the -1 sentiment,
+# # the second cluster being associated with the 0 sentiment,
+# # and the third cluster being associated with the 1 sentiment
+# precisions = []
+# recalls = []
+# f1_scores = []
+# for p in perm:
+#     clustered_data_copy = clustered_data.copy()
+#     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[0], -1)
+#     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[1], 0)
+#     clustered_data_copy["cluster"] = clustered_data_copy["cluster"].replace(p[2], 1)
     
-    print(f"Permutation: Clusters {p} = sentiment (-1, 0, 1))")
-    contingency_table = me.contingency_table(clustered_data_copy)
-    confusion_matrix = me.confusion_matrix(contingency_table)
-    print(f"Confusion matrix:\n{confusion_matrix}")
-    precisions.append(me.precision(confusion_matrix))
-    recalls.append(me.recall(confusion_matrix))
-    f1_scores.append(me.f1_score(confusion_matrix))
-    print(f"Precision: {precisions[-1]}")
-    print(f"Recall: {recalls[-1]}")
-    print(f"F1-score: {f1_scores[-1]}")
-    print()
+#     print(f"Permutation: Clusters {p} = sentiment (-1, 0, 1))")
+#     contingency_table = me.contingency_table(clustered_data_copy)
+#     confusion_matrix = me.confusion_matrix(contingency_table)
+#     print(f"Confusion matrix:\n{confusion_matrix}")
+#     precisions.append(me.precision(confusion_matrix))
+#     recalls.append(me.recall(confusion_matrix))
+#     f1_scores.append(me.f1_score(confusion_matrix))
+#     print(f"Precision: {precisions[-1]}")
+#     print(f"Recall: {recalls[-1]}")
+#     print(f"F1-score: {f1_scores[-1]}")
+#     print()
 
-# We keep the permutation that gives the best f1-score
-best_perm = perm[f1_scores.index(max(f1_scores))]
-print(f"Best permutation: Clusters {best_perm} = sentiment (-1, 0, 1))")
-print(f"Precision: {precisions[perm.index(best_perm)]}")
-print(f"Recall: {recalls[perm.index(best_perm)]}")
-print(f"F1-score: {f1_scores[perm.index(best_perm)]}")
-print()
+# # We keep the permutation that gives the best f1-score
+# best_perm = perm[f1_scores.index(max(f1_scores))]
+# print(f"Best permutation: Clusters {best_perm} = sentiment (-1, 0, 1))")
+# print(f"Precision: {precisions[perm.index(best_perm)]}")
+# print(f"Recall: {recalls[perm.index(best_perm)]}")
+# print(f"F1-score: {f1_scores[perm.index(best_perm)]}")
+# print()
