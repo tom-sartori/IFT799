@@ -47,7 +47,19 @@ if __name__ == "__main__":
                 #on met 1 dans la matrice
                 matrice[i][j] = 1
     #affichage de la matrice
+    ratings1 = pd.read_csv('ratings1.csv')
     print(matrice)
+    matriceU = np.zeros((len(ratings1['userId'].unique()), len(movies1['movieId'].unique())))
+    #parcours des utilisateurs
+    for i in ratings1['userId'].unique():
+        #parcours des films
+        for j in ratings1[ratings1['userId'] == i]['movieId'].unique():
+            #on met la note dans la matrice
+            matriceU[i][j] = ratings1[(ratings1['userId'] == i) & (ratings1['movieId'] == j)]['rating'].values[0]
+    
+    #affichage de la matrice
+    print(matriceU)
+    
     
     
     #affichage du diagramme
