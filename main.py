@@ -21,6 +21,9 @@ if __name__ == "__main__":
     plt.xlabel('Genre')
     plt.ylabel('Nombre de films')
   
+    #Creation d'un nouveau csv supprimant les colonnes des films sans genres
+    movies.drop(movies[movies['genres'] == '(no genres listed)'].index, inplace = True)
+    movies.to_csv('movies1.csv', index=False)
     
     #affichage du diagramme
     plt.show()
