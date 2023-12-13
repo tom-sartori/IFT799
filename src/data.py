@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+
 
 def load_movies():
     """Load all movies from CSV file into Pandas DataFrame."""
@@ -59,3 +61,56 @@ def unique_userIds(ratings):
         if id_ not in ids:
             ids.append(id_)
     return ids
+
+def movies_stats():
+    """
+    Building a binary matrix movie_genre_matrix where :
+    movie_genre_matrix[i,j] = 1 if the movie i is of genre j and movie_genre_matrix[i,j] = 0 otherwise.
+
+    Returns a tuple (movies_map, movie_genre_matrix) where movies_map is a dictionary that maps movie id to index in movie_genre_matrix.
+    """
+
+    movies = load_movies_with_genre()
+
+    unique_genres_ = unique_genres()
+
+    # Maps movie id to index in movie_genre_matrix
+    movies_map = {movie_id: i for i, movie_id in enumerate(movies['movieId'])}
+
+    movie_genre_matrix = np.zeros((len(movies_map), len(unique_genres_)))
+
+    for i, movie_genres in enumerate(movies['genres']):
+        for j, genre in enumerate(unique_genres_):
+            if genre in movie_genres:
+                movie_genre_matrix[i, j] = 1
+
+    return movies_map, movie_genre_matrix
+
+def users_stats(ratings, movie_genre_matrix, movies_map):
+    """
+    Computing the profile vector of each user u, 
+    where the k-th coordinate of the profile vector of u is the sum of the ratings given by u to the movies of genre k.
+    The profiles are stored in a matrix users_profiles where the k-th row is the profile vector of the user k.
+
+    Also computing a binary matrix users_seen_movies where :
+    users_seen_movies[i,j] = 1 if the user i has seen the movie j and users_seen_movies[i,j] = 0 otherwise.
+
+    Returns a tuple (users_map, users_profiles, users_seen_movies) where users_map is a dictionary that maps user id to index in users_profiles.
+    """
+
+    # Load the ratings dataset
+    ratings = ratings.copy()
+    
+    users = unique_userIds(ratings)
+    # Maps user id to index in users_profiles
+    users_map = {user: i for i, user in enumerate(users)}
+
+    users_profiles = np.zeros((len(users), len(unique_genres())))
+    users_seens_movies = np.zeros((len(users), len(movies_map)))
+
+
+    for _, rating in ratings.iterrows():
+        users_profiles[users_map[rating['userId']]] += rating['rating'] * movie_genre_matrix[movies_map[rating['movieId']]]
+        users_seens_movies[users_map[rating['userId']], movies_map[rating['movieId']]] = 1
+
+    return users_map, users_profiles, users_seens_movies
