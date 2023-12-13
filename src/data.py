@@ -24,6 +24,24 @@ def load_ratings_with_genre():
     ratings = ratings.drop("timestamp", axis=1)
     return ratings
 
+def load_train_ratings():
+    """Load all train ratings from CSV file into Pandas DataFrame."""
+    ratings = pd.read_csv("data/ratings_train.csv")
+    ratings = ratings.drop("timestamp", axis=1)
+    return ratings
+
+def load_eval_ratings():
+    """Load all eval ratings from CSV file into Pandas DataFrame."""
+    ratings = pd.read_csv("data/ratings_evaluation.csv")
+    ratings = ratings.drop("timestamp", axis=1)
+    return ratings
+
+def load_test_ratings():
+    """Load all test ratings from CSV file into Pandas DataFrame."""
+    ratings = pd.read_csv("data/ratings_test.csv")
+    ratings = ratings.drop("timestamp", axis=1)
+    return ratings
+
 def unique_genres():
     """Return a list of all unique genres in the dataset ('no genres listed' excluded)."""
     movies = load_movies_with_genre()
