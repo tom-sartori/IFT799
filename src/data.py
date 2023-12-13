@@ -29,19 +29,16 @@ def load_ratings_with_genre():
 def load_train_ratings():
     """Load all train ratings from CSV file into Pandas DataFrame."""
     ratings = pd.read_csv("data/ratings_train.csv")
-    ratings = ratings.drop("timestamp", axis=1)
     return ratings
 
 def load_eval_ratings():
     """Load all eval ratings from CSV file into Pandas DataFrame."""
     ratings = pd.read_csv("data/ratings_evaluation.csv")
-    ratings = ratings.drop("timestamp", axis=1)
     return ratings
 
 def load_test_ratings():
     """Load all test ratings from CSV file into Pandas DataFrame."""
     ratings = pd.read_csv("data/ratings_test.csv")
-    ratings = ratings.drop("timestamp", axis=1)
     return ratings
 
 def unique_genres():
@@ -92,8 +89,8 @@ def users_stats(ratings, movie_genre_matrix, movies_map):
     where the k-th coordinate of the profile vector of u is the sum of the ratings given by u to the movies of genre k.
     The profiles are stored in a matrix users_profiles where the k-th row is the profile vector of the user k.
 
-    Also computing a binary matrix users_seen_movies where :
-    users_seen_movies[i,j] = 1 if the user i has seen the movie j and users_seen_movies[i,j] = 0 otherwise.
+    Also computing a matrix users_seen_movies where :
+    users_seen_movies[i,j] = <rating> if the user i has seen the movie j and users_seen_movies[i,j] = 0 otherwise.
 
     Returns a tuple (users_map, users_profiles, users_seen_movies) where users_map is a dictionary that maps user id to index in users_profiles.
     """
@@ -111,6 +108,6 @@ def users_stats(ratings, movie_genre_matrix, movies_map):
 
     for _, rating in ratings.iterrows():
         users_profiles[users_map[rating['userId']]] += rating['rating'] * movie_genre_matrix[movies_map[rating['movieId']]]
-        users_seens_movies[users_map[rating['userId']], movies_map[rating['movieId']]] = 1
+        users_seens_movies[users_map[rating['userId']], movies_map[rating['movieId']]] = rating['rating']
 
     return users_map, users_profiles, users_seens_movies
