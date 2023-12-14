@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1702513852 "c:/Users/LV/OneDrive/Documents/_Cours/UdS/SD/TP/IFT799/rapport/rapport.tex" "rapport.pdf" "rapport" 1702513854 0
-  "c:/Users/LV/OneDrive/Documents/_Cours/UdS/SD/TP/IFT799/rapport/rapport.tex" 1702513851 11275 126f106c9853633e1e83d1f7a33ec3f1 ""
+["pdflatex"] 1702517557 "c:/Users/LV/OneDrive/Documents/_Cours/UdS/SD/TP/IFT799/rapport/rapport.tex" "rapport.pdf" "rapport" 1702517560 0
+  "c:/Users/LV/OneDrive/Documents/_Cours/UdS/SD/TP/IFT799/rapport/rapport.tex" 1702517557 13260 c27805de9c6569f823cfb6973d2d1c11 ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1693268095 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1693268951 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1693268575 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -51,10 +51,12 @@
   "img/clustering_umap.png" 1702513263 1612794 096c162664c1cc4ca0f4eb92814a319e ""
   "img/clusters_distribution.png" 1702513279 58895 b1840fc9170e1ef23e04e1c1f3309f01 ""
   "img/genre_distribution.png" 1702506113 29643 25541ef797b99193c1d3f7ed59054621 ""
-  "img/silhouette_graph.png" 1702513203 21911 59dab525fbd5da10d75d99d6ef19eaa5 ""
-  "rapport.aux" 1702513854 2723 2a5aed4d75c769ec30c08986513ee05a "pdflatex"
-  "rapport.tex" 1702513851 11275 126f106c9853633e1e83d1f7a33ec3f1 ""
-  "rapport.toc" 1702513854 1025 6753a7d3cdcae3d687b731e4bdbce2db "pdflatex"
+  "img/silhouette_graph_gamma.png" 1702514964 20425 007208ab0147949b8bad0b6193f1caab ""
+  "img/silhouette_graph_k.png" 1702513203 21911 59dab525fbd5da10d75d99d6ef19eaa5 ""
+  "img/silhouette_graph_neighbors.png" 1702516851 15602 b2dc34ac0ca84ef71b63334d1622ee58 ""
+  "rapport.aux" 1702517560 3582 2b4494bc609d5ba16c770afa127276c4 "pdflatex"
+  "rapport.tex" 1702517557 13260 c27805de9c6569f823cfb6973d2d1c11 ""
+  "rapport.toc" 1702517560 1332 5928a7066b5caaf38e8aaad57bc6f5dd "pdflatex"
   (generated)
   "rapport.aux"
   "rapport.log"

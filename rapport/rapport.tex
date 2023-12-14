@@ -82,10 +82,14 @@ entre 0 et 1.
 
 \subsection{Regroupement spectral des utilisateurs}
 Le regroupement spectral des utilisateurs est effectué par la classe
-\texttt{SpectralClustering} de \texttt{scikit-learn}. Nous avons utilisé le solver
+\texttt{SpectralClustering} de \texttt{scikit-learn}. 
+
+\subsubsection{Choix du solveur et de la stratégie}
+Nous avons utilisé le solver
 \texttt{arpack} et la stratégie \texttt{kmeans} qui donnaient les meilleurs
 résultats.
-\vskip 0.25cm
+
+\subsubsection{Choix du nombre de clusters}
 En faisant varier nombre de clusters \texttt{k} de 2 à 5, nous avons pu determiner
 que le nombre de clusters optimal était 2. Voici les résultats obtenus pour
 les différentes valeurs de \texttt{k} en utilisant la métrique \texttt{silhouette\_score}
@@ -93,10 +97,45 @@ de \texttt{scikit-learn} :
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=1\textwidth]{img/silhouette_graph.png}
+  \includegraphics[width=0.8\textwidth]{img/silhouette_graph_k.png}
   \caption{\texttt{silhouette\_score} pour différentes valeurs de \texttt{k}}
 \end{figure}
+\newpage
 
+\subsubsection{Choix du kernel}
+Nous avons essayé différents kernels avec différents paramètres pour le regroupement spectral.
+\vskip 0.25cm
+\noindent Voici les résultats obtenus pour les différentes valeurs de \texttt{gamma} du
+kernel \texttt{rbf} avec \texttt{k = 2} :
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{img/silhouette_graph_gamma.png}
+  \caption{\texttt{silhouette\_score} pour différentes valeurs de \texttt{gamma} du kernel \texttt{rbf}}
+\end{figure}
+
+On constate qu'à partir de 10, le \texttt{silhouette\_score} est très élevé.
+Cependant, dans ce cas le silhouette score n'est pas un bon indicateur car il
+ne prend pas en compte le fait que les clusters obtenus sont très déséquilibrés.
+En effet, en utilisant un \texttt{gamma} de 10, on obtient un cluster de 10512 
+utilisateurs et un cluster de 2 utilisateurs.
+\newpage
+Nous avons également essayé le kernel \texttt{nearest\_neighbors} avec différentes
+valeurs de \texttt{n\_neighbors} (\texttt{k = 2}) :
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/silhouette_graph_neighbors.png}
+    \caption{\texttt{silhouette\_score} pour différentes valeurs de \texttt{n\_neighbors}}
+  \end{figure}
+
+Nous avons donc décidé de conserver le kernel \texttt{rbf} car il semble meilleur
+que le kernel \texttt{nearest\_neighbors} sur notre jeu de données.
+Nous utiliserons un \texttt{gamma} de 1 car il donne des clusters un 
+peu plus équilibrés malgré un \texttt{silhouette\_score}
+plus faible et que les résulats finaux du classifieur sont identiques.
+
+\newpage
 \subsection{Visualisation des clusters}
 Nous avons utilisé plusieurs méthodes pour réduire la dimension des données
 afin de pouvoir visualiser en 2 dimensions les clusters obtenus pour 
@@ -234,8 +273,12 @@ de l'arbre de décision qui était à 1 point ou moins de la note réelle.
 Nous avons alors obtenu un F1-score de $0.82$ ce qui est beaucoup plus
 satisfaisant. Cela signifie que même si l'arbre de décision ne prédit pas
 exactement la note réelle, il prédit une note très proche de la note réelle.
-\vskip 0.25cm
+
+\section{Conclusion}
 Finalement, malgré un F1-score assez faible, notre système de recommandation
-basé sur un arbre de décision semble fonctionner assez bien.
+basé sur un arbre de décision semble fonctionner assez bien. On peut en effet
+considérer qu'une prédiction à 1 point près est une bonne prédiction puisque
+le but est de recommander à l'utilisateur des films qui lui plairont et non
+de prédire exactement la note qu'il donnera au film.
 
 \end{document}

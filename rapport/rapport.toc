@@ -5,10 +5,14 @@
 \contentsline {section}{\numberline {5}Question 5}{5}{}%
 \contentsline {subsection}{\numberline {5.1}Normalisation des profils des utilisateurs}{5}{}%
 \contentsline {subsection}{\numberline {5.2}Regroupement spectral des utilisateurs}{5}{}%
-\contentsline {subsection}{\numberline {5.3}Visualisation des clusters}{6}{}%
-\contentsline {section}{\numberline {6}Question 6}{10}{}%
-\contentsline {subsection}{\numberline {6.1}Préparation des ensembles}{10}{}%
-\contentsline {subsection}{\numberline {6.2}Prétraitement des données}{10}{}%
-\contentsline {subsection}{\numberline {6.3}Recherche des hyperparamètres optimaux}{10}{}%
-\contentsline {subsection}{\numberline {6.4}Entraînement et prédictions de l'arbre de décision}{11}{}%
-\contentsline {subsection}{\numberline {6.5}Résultats}{11}{}%
+\contentsline {subsubsection}{\numberline {5.2.1}Choix du solveur et de la stratégie}{5}{}%
+\contentsline {subsubsection}{\numberline {5.2.2}Choix du nombre de clusters}{5}{}%
+\contentsline {subsubsection}{\numberline {5.2.3}Choix du kernel}{6}{}%
+\contentsline {subsection}{\numberline {5.3}Visualisation des clusters}{8}{}%
+\contentsline {section}{\numberline {6}Question 6}{12}{}%
+\contentsline {subsection}{\numberline {6.1}Préparation des ensembles}{12}{}%
+\contentsline {subsection}{\numberline {6.2}Prétraitement des données}{12}{}%
+\contentsline {subsection}{\numberline {6.3}Recherche des hyperparamètres optimaux}{12}{}%
+\contentsline {subsection}{\numberline {6.4}Entraînement et prédictions de l'arbre de décision}{13}{}%
+\contentsline {subsection}{\numberline {6.5}Résultats}{13}{}%
+\contentsline {section}{\numberline {7}Conclusion}{14}{}%
