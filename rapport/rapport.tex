@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \usepackage{indentfirst}
 \usepackage[margin=1.5in]{geometry}
+\usepackage[hidelinks]{hyperref}
 
 \title{Sciences des données - TP3}
 \author{Alexandre Theisse \and Louis-Vincent Capelli \and Tom Sartori}
@@ -74,7 +75,8 @@ des profils des utilisateurs.
 \newpage
 \section{Question 5}
 \subsection{Normalisation des profils des utilisateurs}
-Afin de rendre le clustering des centaines de fois plus rapide, nous avons
+Afin de rendre le clustering des centaines de fois plus rapide et d'éviter des erreurs
+d'overflow notamment lors de produits de matrices, nous avons
 décidé de normaliser les profils des utilisateurs. Pour cela, nous avons
 simplement divisé tous les coefficients de la matrice des profils des utilisateurs
 par le maximum de la matrice afin que tous les coefficients soient compris
@@ -205,7 +207,7 @@ Cette matrice de taille $nb\_users \times nb\_users$ contient au coefficient
 $(i, j)$ la similarité entre les utilisateurs $i$ et $j$ vis-à-vis de leur profil.
 \vskip 0.25cm
 Le prétraitement des données est effectué par la fonction \texttt{five\_closest\_users}
-de notre module de prétraitement des données. Pour chaque note, trie les utilisateurs
+de notre module de prétraitement des données. Pour chaque note, on trie les utilisateurs
 selon leur similarité avec l'utilisateur qui a laissé la note et ne garde que les
 5 utilisateurs les plus proches ayant noté le même film. Si moins de 5 autres utilisateurs
 ont noté le même film, la note est ignorée.
