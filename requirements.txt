@@ -1,7 +1,0 @@
-pyamg
-numpy
-seaborn
-scikit-learn
-matplotlib
-umap-learn
-pandas
